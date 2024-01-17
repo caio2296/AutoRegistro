@@ -17,7 +17,9 @@ namespace InfraEstrutura.Repositorio.Generico
 
         public RepositorioGenerico()
         {
-            _optionBuilder = new DbContextOptions<Contexto>();
+            _optionBuilder = new DbContextOptionsBuilder<Contexto>()
+            .UseSqlServer("sua_string_de_conexao")
+            .Options;
         }
 
         public async Task Adicionar(T Objeto)

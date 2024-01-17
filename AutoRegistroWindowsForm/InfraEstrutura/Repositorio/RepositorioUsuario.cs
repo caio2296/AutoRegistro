@@ -79,7 +79,7 @@ namespace InfraEstrutura.Repositorio
                 return string.Empty;
             }
         }
-
+#warning Inserir Retornar tipo de usuario
         public Task<string> RetornarTipoUsuario(string email)
         {
             throw new NotImplementedException();
@@ -110,4 +110,5 @@ namespace InfraEstrutura.Repositorio
 #endif
 
         }
+    }
 }

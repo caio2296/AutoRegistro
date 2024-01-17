@@ -38,7 +38,17 @@
             lblPlaca = new Label();
             lblKmAtual = new Label();
             lblOleo = new Label();
-            btnAcessar = new Button();
+            btnCadastrar = new Button();
+            dataGridView1 = new DataGridView();
+            Modelo = new DataGridViewTextBoxColumn();
+            Placa = new DataGridViewTextBoxColumn();
+            KmAtual = new DataGridViewTextBoxColumn();
+            KmTroca = new DataGridViewTextBoxColumn();
+            Editar = new DataGridViewButtonColumn();
+            Atualizar = new DataGridViewButtonColumn();
+            Deletar = new DataGridViewButtonColumn();
+            Manutenção = new DataGridViewButtonColumn();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // lblAutoEscola
@@ -50,113 +60,215 @@
             lblAutoEscola.Size = new Size(170, 38);
             lblAutoEscola.TabIndex = 1;
             lblAutoEscola.Text = "Auto Escola";
+            lblAutoEscola.Click += lblAutoEscola_Click;
             // 
             // textModelo
             // 
+            textModelo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textModelo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            textModelo.Location = new Point(84, 406);
+            textModelo.Location = new Point(85, 405);
             textModelo.Name = "textModelo";
             textModelo.Size = new Size(227, 27);
             textModelo.TabIndex = 4;
             textModelo.Text = "Modelo";
             textModelo.TextAlign = HorizontalAlignment.Center;
+            textModelo.TextChanged += textModelo_TextChanged;
+            textModelo.Enter += text_Enter;
             // 
             // lblCadastroCarros
             // 
             lblCadastroCarros.AutoSize = true;
             lblCadastroCarros.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCadastroCarros.Location = new Point(84, 337);
+            lblCadastroCarros.Location = new Point(85, 337);
             lblCadastroCarros.Name = "lblCadastroCarros";
             lblCadastroCarros.Size = new Size(271, 38);
             lblCadastroCarros.TabIndex = 3;
             lblCadastroCarros.Text = "Cadastro de Carros:";
+            lblCadastroCarros.Click += lblCadastroCarros_Click;
             // 
             // textOleo
             // 
+            textOleo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textOleo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            textOleo.Location = new Point(404, 473);
+            textOleo.Location = new Point(405, 473);
             textOleo.Name = "textOleo";
             textOleo.Size = new Size(227, 27);
             textOleo.TabIndex = 5;
             textOleo.Text = "prox de Óleo(Km)";
             textOleo.TextAlign = HorizontalAlignment.Center;
+            textOleo.TextChanged += textOleo_TextChanged;
             // 
             // textKmAtual
             // 
+            textKmAtual.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textKmAtual.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            textKmAtual.Location = new Point(404, 406);
+            textKmAtual.Location = new Point(405, 405);
             textKmAtual.Name = "textKmAtual";
             textKmAtual.Size = new Size(227, 27);
             textKmAtual.TabIndex = 6;
             textKmAtual.Text = "KmAtual";
             textKmAtual.TextAlign = HorizontalAlignment.Center;
+            textKmAtual.TextChanged += textKmAtual_TextChanged;
             // 
             // textPlaca
             // 
+            textPlaca.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textPlaca.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            textPlaca.Location = new Point(84, 473);
+            textPlaca.Location = new Point(85, 473);
             textPlaca.Name = "textPlaca";
             textPlaca.Size = new Size(227, 27);
             textPlaca.TabIndex = 7;
             textPlaca.Text = "Placa";
             textPlaca.TextAlign = HorizontalAlignment.Center;
+            textPlaca.TextChanged += textPlaca_TextChanged;
             // 
             // lblModel
             // 
+            lblModel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lblModel.AutoSize = true;
             lblModel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblModel.Location = new Point(84, 375);
+            lblModel.Location = new Point(85, 375);
             lblModel.Name = "lblModel";
             lblModel.Size = new Size(174, 28);
             lblModel.TabIndex = 8;
             lblModel.Text = "Modelo do carro:";
+            lblModel.Click += lblModel_Click;
             // 
             // lblPlaca
             // 
+            lblPlaca.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lblPlaca.AutoSize = true;
             lblPlaca.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPlaca.Location = new Point(84, 442);
+            lblPlaca.Location = new Point(85, 443);
             lblPlaca.Name = "lblPlaca";
             lblPlaca.Size = new Size(67, 28);
             lblPlaca.TabIndex = 9;
             lblPlaca.Text = "Placa:";
+            lblPlaca.Click += lblPlaca_Click;
             // 
             // lblKmAtual
             // 
+            lblKmAtual.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lblKmAtual.AutoSize = true;
             lblKmAtual.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblKmAtual.Location = new Point(404, 375);
+            lblKmAtual.Location = new Point(405, 375);
             lblKmAtual.Name = "lblKmAtual";
             lblKmAtual.Size = new Size(105, 28);
             lblKmAtual.TabIndex = 10;
             lblKmAtual.Text = "Km Atual:";
+            lblKmAtual.Click += lblKmAtual_Click;
             // 
             // lblOleo
             // 
+            lblOleo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             lblOleo.AutoSize = true;
             lblOleo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOleo.Location = new Point(404, 442);
+            lblOleo.Location = new Point(405, 443);
             lblOleo.Name = "lblOleo";
             lblOleo.Size = new Size(147, 28);
             lblOleo.TabIndex = 11;
             lblOleo.Text = "Troca de Óleo:";
+            lblOleo.Click += lblOleo_Click;
             // 
-            // btnAcessar
+            // btnCadastrar
             // 
-            btnAcessar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnAcessar.Location = new Point(656, 416);
-            btnAcessar.Name = "btnAcessar";
-            btnAcessar.Size = new Size(353, 84);
-            btnAcessar.TabIndex = 12;
-            btnAcessar.Text = "Cadastrar";
-            btnAcessar.UseVisualStyleBackColor = true;
+            btnCadastrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCadastrar.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCadastrar.Location = new Point(656, 419);
+            btnCadastrar.Name = "btnCadastrar";
+            btnCadastrar.Size = new Size(353, 81);
+            btnCadastrar.TabIndex = 12;
+            btnCadastrar.Text = "Cadastrar";
+            btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Modelo, Placa, KmAtual, KmTroca, Editar, Atualizar, Deletar, Manutenção });
+            dataGridView1.Location = new Point(1, 70);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.RowTemplate.Height = 29;
+            dataGridView1.Size = new Size(1049, 265);
+            dataGridView1.TabIndex = 13;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Modelo
+            // 
+            Modelo.HeaderText = "Modelo";
+            Modelo.MinimumWidth = 6;
+            Modelo.Name = "Modelo";
+            Modelo.ReadOnly = true;
+            Modelo.Width = 125;
+            // 
+            // Placa
+            // 
+            Placa.HeaderText = "Placa";
+            Placa.MinimumWidth = 6;
+            Placa.Name = "Placa";
+            Placa.ReadOnly = true;
+            Placa.Width = 125;
+            // 
+            // KmAtual
+            // 
+            KmAtual.HeaderText = "KmAtual";
+            KmAtual.MinimumWidth = 6;
+            KmAtual.Name = "KmAtual";
+            KmAtual.ReadOnly = true;
+            KmAtual.Width = 125;
+            // 
+            // KmTroca
+            // 
+            KmTroca.HeaderText = "KmTroca";
+            KmTroca.MinimumWidth = 6;
+            KmTroca.Name = "KmTroca";
+            KmTroca.ReadOnly = true;
+            KmTroca.Width = 125;
+            // 
+            // Editar
+            // 
+            Editar.HeaderText = "Editar";
+            Editar.MinimumWidth = 6;
+            Editar.Name = "Editar";
+            Editar.ReadOnly = true;
+            Editar.Text = "Editar";
+            Editar.Width = 125;
+            // 
+            // Atualizar
+            // 
+            Atualizar.HeaderText = "Atualizar";
+            Atualizar.MinimumWidth = 6;
+            Atualizar.Name = "Atualizar";
+            Atualizar.ReadOnly = true;
+            Atualizar.Text = "Atualizar";
+            Atualizar.Width = 125;
+            // 
+            // Deletar
+            // 
+            Deletar.HeaderText = "Deletar";
+            Deletar.MinimumWidth = 6;
+            Deletar.Name = "Deletar";
+            Deletar.ReadOnly = true;
+            Deletar.Text = "Deletar";
+            Deletar.Width = 125;
+            // 
+            // Manutenção
+            // 
+            Manutenção.HeaderText = "Manutenção";
+            Manutenção.MinimumWidth = 6;
+            Manutenção.Name = "Manutenção";
+            Manutenção.ReadOnly = true;
+            Manutenção.Width = 125;
             // 
             // FormCarros
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1051, 538);
-            Controls.Add(btnAcessar);
+            ClientSize = new Size(1051, 539);
+            Controls.Add(dataGridView1);
+            Controls.Add(btnCadastrar);
             Controls.Add(lblOleo);
             Controls.Add(lblKmAtual);
             Controls.Add(lblPlaca);
@@ -170,6 +282,7 @@
             Name = "FormCarros";
             Text = "FormCarros";
             Load += FormCarros_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -186,6 +299,15 @@
         private Label lblPlaca;
         private Label lblKmAtual;
         private Label lblOleo;
-        private Button btnAcessar;
+        private Button btnCadastrar;
+        private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn Modelo;
+        private DataGridViewTextBoxColumn Placa;
+        private DataGridViewTextBoxColumn KmAtual;
+        private DataGridViewTextBoxColumn KmTroca;
+        private DataGridViewButtonColumn Editar;
+        private DataGridViewButtonColumn Atualizar;
+        private DataGridViewButtonColumn Deletar;
+        private DataGridViewButtonColumn Manutenção;
     }
 }

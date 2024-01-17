@@ -3,6 +3,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data.Common;
+using Dominio.Interfaces;
+using Unity;
+using System.Threading.Tasks;
+using AutoRegistro.Controllers;
 
 namespace AutoRegistro
 {
@@ -13,46 +17,54 @@ namespace AutoRegistro
         SqlCommand cmd;
         SqlDataAdapter adapter;
         DataTable dt;
-        public Form1()
+
+
+        private readonly IUnityContainer container;
+        public Form1(IUnityContainer container)
         {
             InitializeComponent();
+            this.MaximizeBox = false;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.container = container ?? throw new ArgumentNullException(nameof(container));
+
         }
 
+        public FormCarros FormCarrosInstance { get; set; }
 
-        private void btnAcessar_Click(object sender, EventArgs e)
+        private async void btnAcessar_Click(object sender, EventArgs e)
         {
             if (textUsuario.Text != "" && textSenha.Text != "")
             {
 
-                using (con = new SqlConnection(cs))
-                {
-                    con.Open();
-                    cmd = new SqlCommand($"Select id from AutoEscola where NomeAuto={textUsuario.Text}, Senha={textSenha.Text}");
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                int idAutoEscola = reader.GetInt32(reader.GetOrdinal("id"));
-                                // Aqui você pode acessar outras colunas, se necessário
-                                // Exemplo: string nome = reader.GetString(reader.GetOrdinal("nome"));
+                //using (con = new SqlConnection(cs))
+                //{
+                //    con.Open();
+                //    cmd = new SqlCommand($"Select id from AutoEscola where NomeAuto={textUsuario.Text}, Senha={textSenha.Text}");
+                //    using (SqlDataReader reader = cmd.ExecuteReader())
+                //    {
+                //        if (reader.HasRows)
+                //        {
+                //            while (reader.Read())
+                //            {
+                //                int idAutoEscola = reader.GetInt32(reader.GetOrdinal("id"));
+                //                // Aqui você pode acessar outras colunas, se necessário
+                //                // Exemplo: string nome = reader.GetString(reader.GetOrdinal("nome"));
 
-                                //Console.WriteLine($"ID: {id}");
-                            }
-                        }
-                        else
-                        {
-                            //usuario não encontrado
-                        }
+                //                //Console.WriteLine($"ID: {id}");
+                //            }
+                //        }
+                //        else
+                //        {
+                //            //usuario não encontrado
+                //        }
 
-                    }
+                //    }
 
-                }
-                FormCarros formCarros = new FormCarros();
+                //}
+                var autoEscolaController = container.Resolve<AutoEscolaController>();
 
                 this.Hide();
-                formCarros.Show();
+                    FormCarrosInstance.Show();
             }
         }
     }
