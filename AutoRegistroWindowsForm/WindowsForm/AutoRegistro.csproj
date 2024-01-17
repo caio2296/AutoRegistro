@@ -23,6 +23,13 @@
     </PackageReference>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aplicacao\Aplicacao.csproj" />
+    <ProjectReference Include="..\Dominio\Dominio.csproj" />
+    <ProjectReference Include="..\InfraEstrutura\InfraEstrutura.csproj" />
   </ItemGroup>
 
 </Project>

@@ -50,7 +50,7 @@ namespace Dominio.Servicos
                            }).ToList();
             return retorno;
         }
-
+#warning buscar Auto Escolas
         public Task<List<AutoEscola>> BuscarAutoEscolas()
         {
             throw new NotImplementedException();

@@ -51,6 +51,7 @@ namespace Dominio.Servicos
             var retorno = (from Veiculo in listarVeiculosCustomizada
                            select new ModelViewVeiculo
                            {
+                               Id = Veiculo.Id,
                                Modelo = Veiculo.Modelo,
                                Placa = Veiculo.Placa,
                                KmAtual = Veiculo.KmAtual,
