@@ -7,6 +7,7 @@ using Dominio.Interfaces;
 using Unity;
 using System.Threading.Tasks;
 using AutoRegistro.Controllers;
+using AutoRegistro.Models;
 
 namespace AutoRegistro
 {
@@ -20,51 +21,46 @@ namespace AutoRegistro
 
 
         private readonly IUnityContainer container;
-        public Form1(IUnityContainer container)
+        private readonly AutoEscolaController _autoEscolaController;
+        private readonly UsuarioController _usuarioController;
+        public Form1(IUnityContainer container,
+            AutoEscolaController autoEscolaController,
+            UsuarioController usuarioController)
         {
             InitializeComponent();
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.container = container ?? throw new ArgumentNullException(nameof(container));
-
+            _autoEscolaController = autoEscolaController ?? throw new ArgumentNullException(nameof(autoEscolaController));
+            _usuarioController= usuarioController ?? throw new ArgumentNullException(nameof(_usuarioController));
         }
 
         public FormCarros FormCarrosInstance { get; set; }
 
-        private async void btnAcessar_Click(object sender, EventArgs e)
+        private void btnAcessar_Click(object sender, EventArgs e)
         {
             if (textUsuario.Text != "" && textSenha.Text != "")
             {
-
-                //using (con = new SqlConnection(cs))
-                //{
-                //    con.Open();
-                //    cmd = new SqlCommand($"Select id from AutoEscola where NomeAuto={textUsuario.Text}, Senha={textSenha.Text}");
-                //    using (SqlDataReader reader = cmd.ExecuteReader())
-                //    {
-                //        if (reader.HasRows)
-                //        {
-                //            while (reader.Read())
-                //            {
-                //                int idAutoEscola = reader.GetInt32(reader.GetOrdinal("id"));
-                //                // Aqui você pode acessar outras colunas, se necessário
-                //                // Exemplo: string nome = reader.GetString(reader.GetOrdinal("nome"));
-
-                //                //Console.WriteLine($"ID: {id}");
-                //            }
-                //        }
-                //        else
-                //        {
-                //            //usuario não encontrado
-                //        }
-
-                //    }
-
-                //}
-                var autoEscolaController = container.Resolve<AutoEscolaController>();
-
-                this.Hide();
+                string nome = textUsuario.Text;
+                string senha = textSenha.Text;
+                var login = new Login
+                {
+                    Nome = nome,
+                    Senha = senha
+                };
+                var tokenData = _autoEscolaController.CriarToken(login).Result;
+                if (tokenData != null)
+                {
+                    this.Hide();
                     FormCarrosInstance.Show();
+                }
+                else
+                {
+                    textUsuario.Text = "";
+                    textSenha.Text = "";
+                    MessageBox.Show("Usuário não encontrado. Verifique suas credenciais.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
             }
         }
     }

@@ -35,6 +35,7 @@ namespace AutoRegistro
             container.RegisterSingleton<IAutoEscola, RepositorioAutoEscola>();
             container.RegisterSingleton<IManutencao, RepositorioManutencao>();
             container.RegisterSingleton<IVeiculo, RepositorioVeiculo>();
+
             // Configuração da injeção de dependência
             container.RegisterSingleton<IAutoEscolaServico, AutoEscolaServico>();
             container.RegisterSingleton<IManutencaoServico, ManutencaoServico>();
@@ -66,6 +67,16 @@ namespace AutoRegistro
 
             // Resolução do controlador com injeção de dependência
             var autoEscolaController = container.Resolve<AutoEscolaController>();
+            container.RegisterInstance(autoEscolaController);
+
+            var ManutencaoController = container.Resolve<ManutencaoController>();
+            container.RegisterInstance(ManutencaoController);
+
+            var usuarioController = container.Resolve<UsuarioController>();
+            container.RegisterInstance(usuarioController);
+
+            var veiculoController = container.Resolve<VeiculoController>();
+            container.RegisterInstance(veiculoController);
 
             var mainForm = container.Resolve<Form1>();
             var formCarros = container.Resolve<FormCarros>();
