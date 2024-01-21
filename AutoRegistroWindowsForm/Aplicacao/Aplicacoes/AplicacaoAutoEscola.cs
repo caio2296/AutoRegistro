@@ -61,9 +61,19 @@ namespace Aplicacao.Aplicacoes
             await _autoEscola.Excluir(Objeto);
         }
 
+        public async Task<bool> ExisteAutoEscola(string nome, string senha)
+        {
+            return await _autoEscola.ExisteAutoEscola(nome, senha);
+        }
+
         public async Task<List<AutoEscola>> Listar()
         {
             return await _autoEscola.Listar();
+        }
+
+        public async Task<string> RetornarIdAutoEscola(string nome)
+        {
+            return await _autoEscola.RetornarIdAutoEscola(nome);
         }
     }
 }

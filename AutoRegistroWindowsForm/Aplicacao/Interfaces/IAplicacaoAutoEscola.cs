@@ -16,5 +16,7 @@ namespace Aplicacao.Interfaces
         Task AtualizarAutoEscola(AutoEscola AutoEscola);
         Task<List<AutoEscola>> BuscarAutoEscolas();
         Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada();
+        Task<bool> ExisteAutoEscola(string nome, string senha);
+        Task<string> RetornarIdAutoEscola(string nome);
     }
 }

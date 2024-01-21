@@ -41,5 +41,44 @@ namespace InfraEstrutura.Repositorio
                 return listarAutoEscola;
             }
         }
+        public async Task<bool> ExisteAutoEscola(string nome, string senha)
+        {
+            try
+            {
+                using (var data = new Contexto(_optionsBuilder))
+                {
+                    return await data.autoEscolas.
+                          Where(u => u.NomeAutoEscola.Equals(nome) && u.Senha.Equals(senha))
+                          .AsNoTracking()
+                          .AnyAsync();
+
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<string> RetornarIdAutoEscola(string nome)
+        {
+            try
+            {
+                using (var data = new Contexto(_optionsBuilder))
+                {
+                    var autoEscola = await data.autoEscolas.
+                          Where(u => u.NomeAutoEscola.Equals(nome))
+                          .AsNoTracking()
+                          .FirstOrDefaultAsync();
+
+                    return autoEscola.Id.ToString();
+
+                }
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

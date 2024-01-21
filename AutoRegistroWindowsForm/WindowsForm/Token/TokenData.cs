@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoRegistro.Models
+namespace AutoRegistro.Token
 {
-    public class Login
+    [Serializable]
+    public class TokenData
     {
-        public string Nome { get; set; }
-        public string Senha { get; set; }
+        public string IdUsuario { get; set; }
     }
 }
