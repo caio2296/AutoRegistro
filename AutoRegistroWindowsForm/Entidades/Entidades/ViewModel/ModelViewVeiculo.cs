@@ -14,5 +14,6 @@ namespace Entidades.Entidades.ViewModel
         public string Placa { get; set; }
         public int KmAtual { get; set; }
         public int KmTrocaOleo { get; set; }
+        public string IdAutoEscola { get; set; }
     }
 }

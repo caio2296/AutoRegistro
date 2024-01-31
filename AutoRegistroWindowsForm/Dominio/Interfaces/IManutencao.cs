@@ -12,6 +12,6 @@ namespace Dominio.Interfaces
     public interface IManutencao:IGenerico<Manutencao>
     {
         Task<List<Manutencao>> ListarManutencoes(Expression<Func<Manutencao, bool>> exManutencao);
-        Task<List<Manutencao>> ListarManutencoesCustomizada();
+        Task<List<Manutencao>> ListarManutencoesCustomizada(int idVeiculo);
     }
 }

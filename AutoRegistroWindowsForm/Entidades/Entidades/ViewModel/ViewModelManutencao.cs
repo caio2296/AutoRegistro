@@ -15,5 +15,6 @@ namespace Entidades.Entidades.ViewModel
         public DateTime DataDaCompra { get; set; }
         public DateTime DataDaInstalacao { get; set; }
         public string? Fabricante { get; set; }
+        public int IdVeiculo { get; set; }
     }
 }

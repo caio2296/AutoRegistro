@@ -12,6 +12,6 @@ namespace Dominio.Interfaces
     public interface IVeiculo:IGenerico<Veiculo>
     {
         Task<List<Veiculo>> ListarVeiculos(Expression<Func<Veiculo, bool>> exVeiculo);
-        Task<List<Veiculo>> ListarVeiculosCustomizada();
+        Task<List<Veiculo>> ListarVeiculosCustomizada(int idAutoEscola);
     }
 }

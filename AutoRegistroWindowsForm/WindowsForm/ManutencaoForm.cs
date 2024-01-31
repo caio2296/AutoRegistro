@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoRegistro.Controllers;
+using AutoRegistro.Models;
+using Dominio.Servicos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +15,17 @@ namespace AutoRegistro
 {
     public partial class ManutencaoForm : Form
     {
-        public ManutencaoForm()
+        private readonly ManutencaoController _manutencaoController;
+        public ManutencaoForm(ManutencaoController manutencaoController)
         {
             InitializeComponent();
+            _manutencaoController = manutencaoController ?? throw new ArgumentException(nameof(manutencaoController));
         }
 
         private void ManutencaoForm_Load(object sender, EventArgs e)
         {
-
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.DataSource = _manutencaoController.BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

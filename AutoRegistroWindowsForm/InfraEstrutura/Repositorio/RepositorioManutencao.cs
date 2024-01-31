@@ -27,11 +27,12 @@ namespace InfraEstrutura.Repositorio
             }
         }
 
-        public Task<List<Manutencao>> ListarManutencoesCustomizada()
+        public Task<List<Manutencao>> ListarManutencoesCustomizada(int idVeiculo)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
                 var listaManutencao = (from Manutencao in banco.manutencao
+                                       where Manutencao.Id == idVeiculo
                                        select new Manutencao
                                        {
                                            Id= Manutencao.Id,
