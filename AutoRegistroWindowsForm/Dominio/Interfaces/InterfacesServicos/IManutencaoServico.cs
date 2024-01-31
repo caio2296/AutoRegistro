@@ -13,6 +13,6 @@ namespace Dominio.Interfaces.InterfacesServicos
         Task AdicionarManutencao(Manutencao manutencao);
         Task AtualizarManutencao(Manutencao manutencao);
         Task<List<Manutencao>> BuscarManutencoes();
-        Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas();
+        Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas(int idVeiculo);
     }
 }

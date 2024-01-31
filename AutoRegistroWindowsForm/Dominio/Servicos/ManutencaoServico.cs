@@ -46,9 +46,9 @@ namespace Dominio.Servicos
             return await _iManutencao.ListarManutencoes(m=> m.DataDaInstalacao == DateTime.MinValue);
         }
 
-        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas()
+        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas(int idVeiculo)
         {
-            var listaManutencoesCustomizadas = await _iManutencao.ListarManutencoesCustomizada();
+            var listaManutencoesCustomizadas = await _iManutencao.ListarManutencoesCustomizada(idVeiculo);
 
             var retorno = (from Manutencao in listaManutencoesCustomizadas
                            select new ViewModelManutencao

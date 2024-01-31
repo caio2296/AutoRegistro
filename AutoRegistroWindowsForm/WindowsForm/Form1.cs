@@ -32,10 +32,11 @@ namespace AutoRegistro
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.container = container ?? throw new ArgumentNullException(nameof(container));
             _autoEscolaController = autoEscolaController ?? throw new ArgumentNullException(nameof(autoEscolaController));
-            _usuarioController= usuarioController ?? throw new ArgumentNullException(nameof(_usuarioController));
+            _usuarioController= usuarioController ?? throw new ArgumentNullException(nameof(usuarioController));
         }
 
         public FormCarros FormCarrosInstance { get; set; }
+        public ManutencaoForm FormManutencaoInstance { get; set; }
 
         private void btnAcessar_Click(object sender, EventArgs e)
         {

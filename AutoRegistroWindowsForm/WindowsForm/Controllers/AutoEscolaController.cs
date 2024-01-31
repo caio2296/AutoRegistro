@@ -2,6 +2,7 @@
 using Aplicacao.Interfaces;
 using AutoRegistro.Models;
 using AutoRegistro.Token;
+using Entidades.Entidades.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic.Logging;
 using System;
@@ -48,6 +49,16 @@ namespace AutoRegistro.Controllers
                 return tokenData;
             }
             return null;
+        }
+        public async Task<ViewModelAutoEscola> BuscarPorId(int id)
+        {
+           var autoEscola = await _IaplicacaoAutoEscola.BuscarPorId(id);
+            var resultado = new ViewModelAutoEscola
+            {
+                Id = autoEscola.Id,
+                NomeAutoEscola = autoEscola.NomeAutoEscola
+            };
+            return resultado;
         }
     
     }

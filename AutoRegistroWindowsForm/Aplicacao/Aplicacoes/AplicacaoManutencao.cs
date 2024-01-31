@@ -41,9 +41,9 @@ namespace Aplicacao.Aplicacoes
             return await _manutencaoServico.BuscarManutencoes();
         }
 
-        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas()
+        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas(int idVeiculo)
         {
-            return await _manutencaoServico.BuscarManutencoesCustomizadas();
+            return await _manutencaoServico.BuscarManutencoesCustomizadas(idVeiculo);
         }
 
         public async Task<Manutencao> BuscarPorId(int id)

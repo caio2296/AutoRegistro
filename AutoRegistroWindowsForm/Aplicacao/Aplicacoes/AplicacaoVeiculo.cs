@@ -46,9 +46,9 @@ namespace Aplicacao.Aplicacoes
             return await _veiculo.BuscarPorId(id);
         }
 
-        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada()
+        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola)
         {
-            return await _veiculoServico.BuscarVeiculosCustomizada();
+            return await _veiculoServico.BuscarVeiculosCustomizada(idAutoEscola);
         }
 
         public async Task<List<Veiculo>> BuscarVeiculosPertoTrocarOleo()

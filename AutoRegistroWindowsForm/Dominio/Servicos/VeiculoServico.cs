@@ -44,9 +44,9 @@ namespace Dominio.Servicos
             return await _iVeiculos.ListarVeiculos(v => 2000 > (v.KmTrocaOleo - v.KmAtual));
         }
 
-        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada()
+        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola)
         {
-            var listarVeiculosCustomizada = await _iVeiculos.ListarVeiculosCustomizada();
+            var listarVeiculosCustomizada = await _iVeiculos.ListarVeiculosCustomizada(idAutoEscola);
 
             var retorno = (from Veiculo in listarVeiculosCustomizada
                            select new ModelViewVeiculo

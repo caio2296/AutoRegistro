@@ -80,7 +80,10 @@ namespace AutoRegistro
 
             var mainForm = container.Resolve<Form1>();
             var formCarros = container.Resolve<FormCarros>();
+            var formManutencao = container.Resolve<ManutencaoForm>();
+            formCarros.MainFormInstance = mainForm;
             mainForm.FormCarrosInstance = formCarros;
+            mainForm.FormManutencaoInstance = formManutencao;
             Application.Run(mainForm);
         }
     }

@@ -9,8 +9,8 @@ namespace Entidades.Entidades.ViewModel
 {
     public class ViewModelAutoEscola
     {
-        public int Id {  get; set; }
-        public string NomeAutoEscola { get; set; }
+        public  int Id {  get; set; }
+        public  string NomeAutoEscola { get; set; }
 
     }
 }

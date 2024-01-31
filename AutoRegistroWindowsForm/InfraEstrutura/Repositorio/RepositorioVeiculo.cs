@@ -29,11 +29,12 @@ namespace InfraEstrutura.Repositorio
             }
         }
 
-        public async Task<List<Veiculo>> ListarVeiculosCustomizada()
+        public async Task<List<Veiculo>> ListarVeiculosCustomizada(int idAutoEscola)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
                 var listaVeiculos = await (from Veiculo in banco.veiculos
+                                           where Veiculo.Id == idAutoEscola
                                            select new Veiculo
                                            {
                                                Id = Veiculo.Id,

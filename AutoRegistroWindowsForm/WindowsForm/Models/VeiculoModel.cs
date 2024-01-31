@@ -8,7 +8,7 @@ namespace AutoRegistro.Models
 {
     public class VeiculoModel
     {
-        public int IdVeiculo { get; set; }
+        public static int IdVeiculo { get; set; }
         public string Placa { get; set; }
         public string Modelo { get; set; }
         public int KmAtual { get; set; }

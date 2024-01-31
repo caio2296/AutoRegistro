@@ -1,4 +1,9 @@
-﻿using Dominio.Interfaces;
+﻿using AutoRegistro.Controllers;
+using AutoRegistro.Models;
+using AutoRegistro.Token;
+using Dominio.Interfaces;
+using Entidades.Entidades;
+using Entidades.Entidades.ViewModel;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -18,8 +23,13 @@ namespace AutoRegistro
 {
     public partial class FormCarros : Form
     {
-        
-        public FormCarros()
+        private readonly VeiculoController _veiculoController;
+        private readonly AutoEscolaController _autoEscolaController;
+        private readonly ManutencaoController _manutencaoController;
+
+        public FormCarros(VeiculoController veiculoController,
+            AutoEscolaController autoEscolaController,
+            ManutencaoController manutencaoController)
         {
             InitializeComponent();
             this.lblCadastroCarros.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -32,17 +42,25 @@ namespace AutoRegistro
             textPlaca.Enter += text_Enter;
             dataGridView1.ScrollBars = ScrollBars.Both;
 
+            _veiculoController = veiculoController ?? throw new ArgumentNullException(nameof(veiculoController));
+            _autoEscolaController = autoEscolaController ?? throw new ArgumentException(nameof(autoEscolaController));
+            _manutencaoController= manutencaoController ?? throw new ArgumentException(nameof(manutencaoController));
         }
+        public Form1 MainFormInstance { get; set; }
         private void FormCarros_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //carregar dados grid
             Application.Exit();
         }
 
         private void FormCarros_Load(object sender, EventArgs e)
         {
+            ViewModelAutoEscola viewModel =
+                _autoEscolaController.BuscarPorId(int.Parse(ApplicationState.TokenData.IdUsuario)).Result;
+            lblAutoEscola.Text = viewModel.NomeAutoEscola;
             // Manipula o evento de clique no botão na coluna "Ação"
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.DataSource = _veiculoController
+                                           .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));
 
         }
 
@@ -71,29 +89,10 @@ namespace AutoRegistro
         {
             try
             {
-                // Verifica se o clique ocorreu na coluna "Ação" e em uma linha válida
-                if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Ação"].Index)
-                {
-                    // Obtém a célula na coluna "Modelo" da linha clicada
-                    DataGridViewCell modeloCell = dataGridView1.Rows[e.RowIndex].Cells["Modelo"];
-
-                    // Verifica se a célula e o valor não são null
-                    if (modeloCell != null && modeloCell.Value != null)
-                    {
-                        string modelo = modeloCell.Value.ToString();
-
-                        // Agora você pode usar a variável 'modelo' conforme necessário
-                        MessageBox.Show("Modelo: " + modelo);
-                    }
-                    else
-                    {
-                        // Adicione um tratamento para o caso em que a célula ou o valor é null
-                        MessageBox.Show("Erro: Célula ou valor de célula é null.");
-                    }
-                }
                 EditarGrid(e);
                 AtualizarGrid(e);
                 DeletarGrid(e);
+                ManutencaoGrid(e);
             }
             catch (Exception)
             {
@@ -110,13 +109,13 @@ namespace AutoRegistro
                 {
                     DataGridViewRow dr = dataGridView1.SelectedRows[0];
 
-                    textModelo.Text = dr.Cells[0].Value.ToString();
-                    textPlaca.Text = dr.Cells[1].Value.ToString();
-                    textKmAtual.Text = dr.Cells[2].Value.ToString();
-                    textOleo.Text = dr.Cells[3].Value.ToString();
+                    textModelo.Text = dr.Cells[1].Value.ToString();
+                    textPlaca.Text = dr.Cells[2].Value.ToString();
+                    textKmAtual.Text = dr.Cells[3].Value.ToString();
+                    textOleo.Text = dr.Cells[4].Value.ToString();
+
                 }
             }
-
         }
 
         private void AtualizarGrid(DataGridViewCellEventArgs e)
@@ -127,12 +126,19 @@ namespace AutoRegistro
                 {
                     DataGridViewRow atualizar = dataGridView1.SelectedRows[0];
 
-                    atualizar.Cells[0].Value = textModelo.Text;
-                    atualizar.Cells[1].Value = textPlaca.Text;
-                    atualizar.Cells[2].Value = textKmAtual.Text;
-                    atualizar.Cells[3].Value = textOleo.Text;
-
-                    //aplicação atualizar inserir a entidade Veiculo
+                    atualizar.Cells[1].Value = textModelo.Text;
+                    atualizar.Cells[2].Value = textPlaca.Text;
+                    atualizar.Cells[3].Value = textKmAtual.Text;
+                    atualizar.Cells[4].Value = textOleo.Text;
+                    var novoVeiculo = new Veiculo
+                    {
+                        Id = int.Parse(atualizar.Cells[0].Value.ToString()),
+                        Modelo = atualizar.Cells[1].Value.ToString(),
+                        Placa = atualizar.Cells[2].Value.ToString(),
+                        KmAtual = int.Parse(atualizar.Cells[3].Value.ToString()),
+                        KmTrocaOleo = int.Parse(atualizar.Cells[4].Value.ToString())
+                    };
+                    _veiculoController.AtualizarVeiculo(novoVeiculo);
                 }
             }
         }
@@ -150,9 +156,45 @@ namespace AutoRegistro
             }
         }
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
+        private void ManutencaoGrid(DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Manuteção"].Index)
+            {
+                if (dataGridView1.Columns[e.ColumnIndex].Name == "Manutenção")
+                {
+                    DataGridViewRow dr = dataGridView1.SelectedRows[0];
+                    //pesquisar pelo id do veiculo a lista de manutenções 
+                    VeiculoModel.IdVeiculo = int.Parse(dr.Cells[0].Value.ToString());
 
+                    ManutencaoForm formManutencao = MainFormInstance.FormManutencaoInstance;
+
+                    formManutencao.Show(); 
+                }
+            }
+        }
+
+        private async void btnCadastrar_Click(object sender, EventArgs e)
+        {
+            if (textModelo.Text != "" &&
+                textPlaca.Text != ""  &&
+                textOleo.Text  != ""  &&
+                textKmAtual.Text !="")
+            {
+                string modelo = textModelo.Text;
+                string placa = textPlaca.Text;
+                string oleo = textOleo.Text;
+                string kmAtual = textKmAtual.Text;
+
+                var veiculoNovo = new Veiculo
+                {
+                    Modelo = modelo,
+                    Placa = placa,
+                    KmTrocaOleo = int.Parse(oleo),
+                    KmAtual = int.Parse(kmAtual)
+                };
+
+               await _veiculoController.AdicionarVeiculo(veiculoNovo);
+            }
         }
 
         private void lblAutoEscola_Click(object sender, EventArgs e)
