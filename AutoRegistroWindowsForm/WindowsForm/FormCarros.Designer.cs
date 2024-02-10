@@ -40,6 +40,7 @@
             lblOleo = new Label();
             btnCadastrar = new Button();
             dataGridView1 = new DataGridView();
+            Id = new DataGridViewTextBoxColumn();
             Modelo = new DataGridViewTextBoxColumn();
             Placa = new DataGridViewTextBoxColumn();
             KmAtual = new DataGridViewTextBoxColumn();
@@ -91,6 +92,7 @@
             textOleo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textOleo.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             textOleo.Location = new Point(405, 473);
+            textOleo.MaxLength = 7;
             textOleo.Name = "textOleo";
             textOleo.Size = new Size(227, 27);
             textOleo.TabIndex = 5;
@@ -98,13 +100,13 @@
             textOleo.TextAlign = HorizontalAlignment.Center;
             textOleo.TextChanged += textOleo_TextChanged;
             textOleo.KeyPress += textOleo_KeyPress;
-            textOleo.MaxLength = 7;
             // 
             // textKmAtual
             // 
             textKmAtual.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             textKmAtual.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             textKmAtual.Location = new Point(405, 405);
+            textKmAtual.MaxLength = 7;
             textKmAtual.Name = "textKmAtual";
             textKmAtual.Size = new Size(227, 27);
             textKmAtual.TabIndex = 6;
@@ -112,7 +114,6 @@
             textKmAtual.TextAlign = HorizontalAlignment.Center;
             textKmAtual.TextChanged += textKmAtual_TextChanged;
             textKmAtual.KeyPress += textKmAtual_KeyPress;
-            textKmAtual.MaxLength= 7;
             // 
             // textPlaca
             // 
@@ -190,7 +191,7 @@
             // 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Modelo, Placa, KmAtual, KmTroca, Editar, Atualizar, Deletar, Manutenção });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Id, Modelo, Placa, KmAtual, KmTroca, Editar, Atualizar, Deletar, Manutenção });
             dataGridView1.Location = new Point(1, 70);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
@@ -198,6 +199,14 @@
             dataGridView1.Size = new Size(1049, 265);
             dataGridView1.TabIndex = 13;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // Id
+            // 
+            Id.HeaderText = "Id";
+            Id.MinimumWidth = 6;
+            Id.Name = "Id";
+            Id.Visible = false;
+            Id.Width = 125;
             // 
             // Modelo
             // 
@@ -238,7 +247,7 @@
             Editar.Name = "Editar";
             Editar.ReadOnly = true;
             Editar.Text = "Editar";
-            Editar.UseColumnTextForButtonValue= true;
+            Editar.UseColumnTextForButtonValue = true;
             Editar.Width = 125;
             // 
             // Atualizar
@@ -315,6 +324,7 @@
         private Label lblOleo;
         private Button btnCadastrar;
         private DataGridView dataGridView1;
+        private DataGridViewTextBoxColumn Id;
         private DataGridViewTextBoxColumn Modelo;
         private DataGridViewTextBoxColumn Placa;
         private DataGridViewTextBoxColumn KmAtual;
