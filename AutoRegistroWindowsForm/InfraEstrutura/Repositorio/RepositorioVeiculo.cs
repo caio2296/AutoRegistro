@@ -21,6 +21,17 @@ namespace InfraEstrutura.Repositorio
             _optionsBuilder = new DbContextOptions<Contexto>();
         }
 
+        public bool ExisteVeiculo(string placa)
+        {
+            using (var banco = new Contexto(_optionsBuilder))
+            {
+                return banco.veiculos
+                    .Where(v => v.Placa.Equals(placa))
+                    .AsTracking()
+                    .Any();
+            }
+        }
+
         public async Task<List<Veiculo>> ListarVeiculos(Expression<Func<Veiculo, bool>> exVeiculo)
         {
             using (var banco = new Contexto(_optionsBuilder))
@@ -29,12 +40,12 @@ namespace InfraEstrutura.Repositorio
             }
         }
 
-        public async Task<List<Veiculo>> ListarVeiculosCustomizada(int idAutoEscola)
+        public  List<Veiculo> ListarVeiculosCustomizada(int idAutoEscola)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
-                var listaVeiculos = await (from Veiculo in banco.veiculos
-                                           where Veiculo.Id == idAutoEscola
+                var listaVeiculos =  (from Veiculo in banco.veiculos
+                                           where Veiculo.IdAutoEscola == idAutoEscola
                                            select new Veiculo
                                            {
                                                Id = Veiculo.Id,
@@ -44,7 +55,7 @@ namespace InfraEstrutura.Repositorio
                                                KmTrocaOleo = Veiculo.KmTrocaOleo,
                                                IdAutoEscola = Veiculo.IdAutoEscola,
 
-                                           }).AsNoTracking().ToListAsync();
+                                           }).AsNoTracking().ToList();
                 return listaVeiculos;
             }
         }

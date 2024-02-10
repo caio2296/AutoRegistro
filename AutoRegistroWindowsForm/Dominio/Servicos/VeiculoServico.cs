@@ -17,14 +17,14 @@ namespace Dominio.Servicos
         {
                 _iVeiculos = veiculo;
         }
-        public async Task AdicionarVeiculo(Veiculo veiculo)
+        public void  AdicionarVeiculo(Veiculo veiculo)
         {
             var validarModelo = veiculo.ValidarPropriedadeString(veiculo.Modelo, "Modelo");
             var validarPlaca = veiculo.ValidarPropriedadeString(veiculo.Placa, "Placa");
             var validarKmTrocaOleo = veiculo.ValidarPropriedadeString(veiculo.KmTrocaOleo.ToString(), "kmTrocaOleao");
             if (validarModelo && validarPlaca && validarKmTrocaOleo)
             {
-                await _iVeiculos.Adicionar(veiculo);
+                 _iVeiculos.Adicionar(veiculo);
             }
         }
 
@@ -44,9 +44,9 @@ namespace Dominio.Servicos
             return await _iVeiculos.ListarVeiculos(v => 2000 > (v.KmTrocaOleo - v.KmAtual));
         }
 
-        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola)
+        public  List<ModelViewVeiculo> BuscarVeiculosCustomizada(int idAutoEscola)
         {
-            var listarVeiculosCustomizada = await _iVeiculos.ListarVeiculosCustomizada(idAutoEscola);
+            var listarVeiculosCustomizada =  _iVeiculos.ListarVeiculosCustomizada(idAutoEscola);
 
             var retorno = (from Veiculo in listarVeiculosCustomizada
                            select new ModelViewVeiculo

@@ -17,7 +17,7 @@ namespace Dominio.Servicos
         {
                 _iManutencao = manutencao;
         }
-        public async Task AdicionarManutencao(Manutencao manutencao)
+        public void  AdicionarManutencao(Manutencao manutencao)
         {
             var validarPeca = manutencao.ValidarPropriedadeString(manutencao.NomePeca,"Nome da Peca");
             var validarPreco = manutencao.ValidarPropriedadeDecimal(manutencao.Preco, "Preço");
@@ -25,7 +25,7 @@ namespace Dominio.Servicos
             if (validarPeca && validarPreco && validarFabricante)
             {
                 
-                await _iManutencao.Adicionar(manutencao);
+                 _iManutencao.Adicionar(manutencao);
             }
         }
 

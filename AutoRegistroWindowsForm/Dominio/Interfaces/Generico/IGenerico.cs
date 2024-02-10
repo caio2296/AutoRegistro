@@ -8,10 +8,10 @@ namespace Dominio.Interfaces.Generico
 {
     public interface IGenerico<T> where T : class
     {
-        Task Adicionar(T Objeto);
+        void Adicionar(T Objeto);
         Task Atualizar(T Objecto);
         Task Excluir(T Objeto);
-        Task<T?> BuscarPorId(int id);
+        T? BuscarPorId(int id);
         Task<List<T>> Listar();
     }
 }

@@ -12,11 +12,11 @@ namespace Aplicacao.Interfaces
 {
     public interface IAplicacaoAutoEscola:IGenericaAplicacao<AutoEscola>
     {
-        Task AdicionarAutoEscola(AutoEscola AutoEscola);
+        void AdicionarAutoEscola(AutoEscola AutoEscola);
         Task AtualizarAutoEscola(AutoEscola AutoEscola);
         Task<List<AutoEscola>> BuscarAutoEscolas();
         Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada();
-        Task<bool> ExisteAutoEscola(string nome, string senha);
-        Task<string> RetornarIdAutoEscola(string nome);
+        bool ExisteAutoEscola(string nome, string senha);
+        string RetornarIdAutoEscola(string nome);
     }
 }

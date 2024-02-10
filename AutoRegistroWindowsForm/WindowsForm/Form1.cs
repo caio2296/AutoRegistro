@@ -49,7 +49,7 @@ namespace AutoRegistro
                     Nome = nome,
                     Senha = senha
                 };
-                var tokenData = _autoEscolaController.CriarToken(login).Result;
+                var tokenData = _autoEscolaController.CriarToken(login);
                 if (tokenData != null)
                 {
                     this.Hide();

@@ -18,13 +18,13 @@ namespace Dominio.Servicos
         {
                 _IAutoEscola = autoEscola;
         }
-        public async Task AdicionarAutoEscola(AutoEscola AutoEscola)
+        public void  AdicionarAutoEscola(AutoEscola AutoEscola)
         {
             var validarNome = AutoEscola.ValidarPropriedadeString(AutoEscola.NomeAutoEscola,"Nome da AutoEscola");
             var validarSenha = AutoEscola.ValidarPropriedadeString(AutoEscola.Senha, "Senha");
             if (validarNome && validarSenha)
             {
-                await _IAutoEscola.Adicionar(AutoEscola);
+                 _IAutoEscola.Adicionar(AutoEscola);
             }
         }
 

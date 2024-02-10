@@ -21,14 +21,14 @@ namespace Aplicacao.Aplicacoes
             _veiculoServico=veiculoServico;
             _veiculo=veiculo;    
         }
-        public async Task Adicionar(Veiculo Objeto)
+        public void Adicionar(Veiculo Objeto)
         {
-           await _veiculo.Adicionar(Objeto);
+            _veiculo.Adicionar(Objeto);
         }
 
-        public async Task AdicionarVeiculo(Veiculo veiculo)
+        public void AdicionarVeiculo(Veiculo veiculo)
         {
-            await _veiculoServico.AdicionarVeiculo(veiculo);
+             _veiculoServico.AdicionarVeiculo(veiculo);
         }
 
         public async Task Atualizar(Veiculo Objeto)
@@ -41,14 +41,14 @@ namespace Aplicacao.Aplicacoes
             await _veiculoServico.AtualizarVeiculo(veiculo);
         }
 
-        public async Task<Veiculo> BuscarPorId(int id)
+        public  Veiculo BuscarPorId(int id)
         {
-            return await _veiculo.BuscarPorId(id);
+            return  _veiculo.BuscarPorId(id);
         }
 
-        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola)
+        public  List<ModelViewVeiculo> BuscarVeiculosCustomizada(int idAutoEscola)
         {
-            return await _veiculoServico.BuscarVeiculosCustomizada(idAutoEscola);
+            return  _veiculoServico.BuscarVeiculosCustomizada(idAutoEscola);
         }
 
         public async Task<List<Veiculo>> BuscarVeiculosPertoTrocarOleo()
@@ -64,6 +64,11 @@ namespace Aplicacao.Aplicacoes
         public async Task<List<Veiculo>> Listar()
         {
            return await _veiculo.Listar();
+        }
+
+        public bool ExisteVeiculo(string placa)
+        {
+            return _veiculo.ExisteVeiculo(placa);
         }
     }
 }

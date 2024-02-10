@@ -38,10 +38,13 @@ namespace AutoRegistro
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             textModelo.Enter += text_Enter;
             textKmAtual.Enter += text_Enter;
+            textKmAtual.MaxLength = 7;
             textOleo.Enter += text_Enter;
+            textOleo.MaxLength = 7;
             textPlaca.Enter += text_Enter;
             dataGridView1.ScrollBars = ScrollBars.Both;
-
+            dataGridView1.AutoGenerateColumns = false;
+            
             _veiculoController = veiculoController ?? throw new ArgumentNullException(nameof(veiculoController));
             _autoEscolaController = autoEscolaController ?? throw new ArgumentException(nameof(autoEscolaController));
             _manutencaoController= manutencaoController ?? throw new ArgumentException(nameof(manutencaoController));
@@ -55,13 +58,18 @@ namespace AutoRegistro
         private void FormCarros_Load(object sender, EventArgs e)
         {
             ViewModelAutoEscola viewModel =
-                _autoEscolaController.BuscarPorId(int.Parse(ApplicationState.TokenData.IdUsuario)).Result;
+                 _autoEscolaController.BuscarPorId(int.Parse(ApplicationState.TokenData.IdUsuario));
             lblAutoEscola.Text = viewModel.NomeAutoEscola;
             // Manipula o evento de clique no botão na coluna "Ação"
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            dataGridView1.DataSource = _veiculoController
-                                           .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));
 
+            var veiculos = _veiculoController
+                                           .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));
+            foreach (var veiculo in veiculos)
+            {
+                dataGridView1.Rows.Add(veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
+               veiculo.KmTrocaOleo);
+            }
         }
 
         private void text_Enter(object sender, EventArgs e)
@@ -107,12 +115,13 @@ namespace AutoRegistro
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Editar")
                 {
-                    DataGridViewRow dr = dataGridView1.SelectedRows[0];
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    DataGridViewRow dr = dataGridView1.Rows[rowIndex];
 
-                    textModelo.Text = dr.Cells[1].Value.ToString();
-                    textPlaca.Text = dr.Cells[2].Value.ToString();
-                    textKmAtual.Text = dr.Cells[3].Value.ToString();
-                    textOleo.Text = dr.Cells[4].Value.ToString();
+                    textModelo.Text = dr.Cells[0].Value.ToString();
+                    textPlaca.Text = dr.Cells[1].Value.ToString();
+                    textKmAtual.Text = dr.Cells[2].Value.ToString();
+                    textOleo.Text = dr.Cells[3].Value.ToString();
 
                 }
             }
@@ -124,7 +133,8 @@ namespace AutoRegistro
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Atualizar")
                 {
-                    DataGridViewRow atualizar = dataGridView1.SelectedRows[0];
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    DataGridViewRow atualizar = dataGridView1.Rows[rowIndex];
 
                     atualizar.Cells[1].Value = textModelo.Text;
                     atualizar.Cells[2].Value = textPlaca.Text;
@@ -149,7 +159,10 @@ namespace AutoRegistro
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Deletar")
                 {
-                    dataGridView1.Rows.RemoveAt(dataGridView1.SelectedRows[0].Index);
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    DataGridViewRow deletar = dataGridView1.Rows[rowIndex];
+
+                    dataGridView1.Rows.RemoveAt(deletar.Index);
 
                     //Deletar aplicação 
                 }
@@ -158,13 +171,14 @@ namespace AutoRegistro
 
         private void ManutencaoGrid(DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Manuteção"].Index)
+            if (e.RowIndex >= 0 && e.ColumnIndex == dataGridView1.Columns["Manutenção"].Index)
             {
                 if (dataGridView1.Columns[e.ColumnIndex].Name == "Manutenção")
                 {
-                    DataGridViewRow dr = dataGridView1.SelectedRows[0];
+                    int rowIndex = dataGridView1.CurrentCell.RowIndex;
+                    DataGridViewRow manutencao = dataGridView1.Rows[rowIndex];
                     //pesquisar pelo id do veiculo a lista de manutenções 
-                    VeiculoModel.IdVeiculo = int.Parse(dr.Cells[0].Value.ToString());
+                    VeiculoModel.IdVeiculo = int.Parse(manutencao.Cells[0].Value.ToString());
 
                     ManutencaoForm formManutencao = MainFormInstance.FormManutencaoInstance;
 
@@ -180,7 +194,7 @@ namespace AutoRegistro
                 textOleo.Text  != ""  &&
                 textKmAtual.Text !="")
             {
-                string modelo = textModelo.Text;
+                string modelo = textModelo.Text.ToUpper();
                 string placa = textPlaca.Text;
                 string oleo = textOleo.Text;
                 string kmAtual = textKmAtual.Text;
@@ -190,10 +204,28 @@ namespace AutoRegistro
                     Modelo = modelo,
                     Placa = placa,
                     KmTrocaOleo = int.Parse(oleo),
-                    KmAtual = int.Parse(kmAtual)
+                    KmAtual = int.Parse(kmAtual),
+                    IdAutoEscola= int.Parse(ApplicationState.TokenData.IdUsuario)
                 };
 
-               await _veiculoController.AdicionarVeiculo(veiculoNovo);
+                if (!_veiculoController.ExisteVeiculo(veiculoNovo.Placa))
+                {
+                    _veiculoController.AdicionarVeiculo(veiculoNovo);
+                    var veiculos = _veiculoController
+                                              .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));
+
+                    foreach (var veiculo in veiculos)
+                    {
+                        dataGridView1.Rows.Add(veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
+                       veiculo.KmTrocaOleo);
+                    }
+                    dataGridView1.Refresh();
+                }
+                else
+                {
+                    MessageBox.Show("Veiculo ja existe, e não pode ser cadastrado!");
+                }
+               
             }
         }
 
@@ -224,6 +256,15 @@ namespace AutoRegistro
 
         private void textOleo_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void textOleo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
 
         private void lblOleo_Click(object sender, EventArgs e)
@@ -232,6 +273,14 @@ namespace AutoRegistro
 
         private void textKmAtual_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void textKmAtual_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
 
         private void lblKmAtual_Click(object sender, EventArgs e)

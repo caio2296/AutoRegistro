@@ -97,6 +97,8 @@
             textOleo.Text = "prox de Óleo(Km)";
             textOleo.TextAlign = HorizontalAlignment.Center;
             textOleo.TextChanged += textOleo_TextChanged;
+            textOleo.KeyPress += textOleo_KeyPress;
+            textOleo.MaxLength = 7;
             // 
             // textKmAtual
             // 
@@ -109,6 +111,8 @@
             textKmAtual.Text = "KmAtual";
             textKmAtual.TextAlign = HorizontalAlignment.Center;
             textKmAtual.TextChanged += textKmAtual_TextChanged;
+            textKmAtual.KeyPress += textKmAtual_KeyPress;
+            textKmAtual.MaxLength= 7;
             // 
             // textPlaca
             // 
@@ -234,6 +238,7 @@
             Editar.Name = "Editar";
             Editar.ReadOnly = true;
             Editar.Text = "Editar";
+            Editar.UseColumnTextForButtonValue= true;
             Editar.Width = 125;
             // 
             // Atualizar
@@ -243,6 +248,7 @@
             Atualizar.Name = "Atualizar";
             Atualizar.ReadOnly = true;
             Atualizar.Text = "Atualizar";
+            Atualizar.UseColumnTextForButtonValue = true;
             Atualizar.Width = 125;
             // 
             // Deletar
@@ -252,6 +258,7 @@
             Deletar.Name = "Deletar";
             Deletar.ReadOnly = true;
             Deletar.Text = "Deletar";
+            Deletar.UseColumnTextForButtonValue = true;
             Deletar.Width = 125;
             // 
             // Manutenção
@@ -260,6 +267,8 @@
             Manutenção.MinimumWidth = 6;
             Manutenção.Name = "Manutenção";
             Manutenção.ReadOnly = true;
+            Manutenção.Text = "Manutenção";
+            Manutenção.UseColumnTextForButtonValue = true;
             Manutenção.Width = 125;
             // 
             // FormCarros
@@ -285,6 +294,11 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
+        }
+
+        private void TextKmAtual_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -21,14 +21,14 @@ namespace Aplicacao.Aplicacoes
                 _autoEscola = autoEscola;
             _autoEscolaServico = autoEscolaServico;
         }
-        public async Task Adicionar(AutoEscola Objeto)
+        public void Adicionar(AutoEscola Objeto)
         {
-            await _autoEscola.Adicionar(Objeto);
+             _autoEscola.Adicionar(Objeto);
         }
 
-        public async Task AdicionarAutoEscola(AutoEscola AutoEscola)
+        public void AdicionarAutoEscola(AutoEscola AutoEscola)
         {
-            await _autoEscolaServico.AdicionarAutoEscola(AutoEscola);
+             _autoEscolaServico.AdicionarAutoEscola(AutoEscola);
         }
 
         public async Task Atualizar(AutoEscola Objeto)
@@ -51,9 +51,9 @@ namespace Aplicacao.Aplicacoes
             return await _autoEscolaServico.BuscarAutoEscolas();
         }
 
-        public async Task<AutoEscola> BuscarPorId(int id)
+        public  AutoEscola BuscarPorId(int id)
         {
-            return await _autoEscola.BuscarPorId(id);
+            return  _autoEscola.BuscarPorId(id);
         }
 
         public async Task Excluir(AutoEscola Objeto)
@@ -61,9 +61,9 @@ namespace Aplicacao.Aplicacoes
             await _autoEscola.Excluir(Objeto);
         }
 
-        public async Task<bool> ExisteAutoEscola(string nome, string senha)
+        public  bool ExisteAutoEscola(string nome, string senha)
         {
-            return await _autoEscola.ExisteAutoEscola(nome, senha);
+            return  _autoEscola.ExisteAutoEscola(nome, senha);
         }
 
         public async Task<List<AutoEscola>> Listar()
@@ -71,9 +71,9 @@ namespace Aplicacao.Aplicacoes
             return await _autoEscola.Listar();
         }
 
-        public async Task<string> RetornarIdAutoEscola(string nome)
+        public string RetornarIdAutoEscola(string nome)
         {
-            return await _autoEscola.RetornarIdAutoEscola(nome);
+            return  _autoEscola.RetornarIdAutoEscola(nome);
         }
     }
 }

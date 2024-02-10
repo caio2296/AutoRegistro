@@ -41,16 +41,16 @@ namespace InfraEstrutura.Repositorio
                 return listarAutoEscola;
             }
         }
-        public async Task<bool> ExisteAutoEscola(string nome, string senha)
+        public bool ExisteAutoEscola(string nome, string senha)
         {
             try
             {
                 using (var data = new Contexto(_optionsBuilder))
                 {
-                    return await data.autoEscolas.
+                    return  data.autoEscolas.
                           Where(u => u.NomeAutoEscola.Equals(nome) && u.Senha.Equals(senha))
                           .AsNoTracking()
-                          .AnyAsync();
+                          .Any();
 
                 }
             }
@@ -60,16 +60,16 @@ namespace InfraEstrutura.Repositorio
             }
         }
 
-        public async Task<string> RetornarIdAutoEscola(string nome)
+        public string RetornarIdAutoEscola(string nome)
         {
             try
             {
                 using (var data = new Contexto(_optionsBuilder))
                 {
-                    var autoEscola = await data.autoEscolas.
+                    var autoEscola =  data.autoEscolas.
                           Where(u => u.NomeAutoEscola.Equals(nome))
                           .AsNoTracking()
-                          .FirstOrDefaultAsync();
+                          .FirstOrDefault();
 
                     return autoEscola.Id.ToString();
 
@@ -80,5 +80,6 @@ namespace InfraEstrutura.Repositorio
                 return string.Empty;
             }
         }
+
     }
 }
