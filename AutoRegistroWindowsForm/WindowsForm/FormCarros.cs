@@ -44,10 +44,10 @@ namespace AutoRegistro
             textPlaca.Enter += text_Enter;
             dataGridView1.ScrollBars = ScrollBars.Both;
             dataGridView1.AutoGenerateColumns = false;
-            
+
             _veiculoController = veiculoController ?? throw new ArgumentNullException(nameof(veiculoController));
             _autoEscolaController = autoEscolaController ?? throw new ArgumentException(nameof(autoEscolaController));
-            _manutencaoController= manutencaoController ?? throw new ArgumentException(nameof(manutencaoController));
+            _manutencaoController = manutencaoController ?? throw new ArgumentException(nameof(manutencaoController));
         }
         public Form1 MainFormInstance { get; set; }
         private void FormCarros_FormClosed(object sender, FormClosedEventArgs e)
@@ -118,10 +118,10 @@ namespace AutoRegistro
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
                     DataGridViewRow dr = dataGridView1.Rows[rowIndex];
 
-                    textModelo.Text = dr.Cells[0].Value.ToString();
-                    textPlaca.Text = dr.Cells[1].Value.ToString();
-                    textKmAtual.Text = dr.Cells[2].Value.ToString();
-                    textOleo.Text = dr.Cells[3].Value.ToString();
+                    textModelo.Text = dr.Cells[1].Value.ToString();
+                    textPlaca.Text = dr.Cells[2].Value.ToString();
+                    textKmAtual.Text = dr.Cells[3].Value.ToString();
+                    textOleo.Text = dr.Cells[4].Value.ToString();
 
                 }
             }
@@ -182,7 +182,7 @@ namespace AutoRegistro
 
                     ManutencaoForm formManutencao = MainFormInstance.FormManutencaoInstance;
 
-                    formManutencao.Show(); 
+                    formManutencao.Show();
                 }
             }
         }
@@ -190,9 +190,9 @@ namespace AutoRegistro
         private async void btnCadastrar_Click(object sender, EventArgs e)
         {
             if (textModelo.Text != "" &&
-                textPlaca.Text != ""  &&
-                textOleo.Text  != ""  &&
-                textKmAtual.Text !="")
+                textPlaca.Text != "" &&
+                textOleo.Text != "" &&
+                textKmAtual.Text != "")
             {
                 string modelo = textModelo.Text.ToUpper();
                 string placa = textPlaca.Text;
@@ -205,7 +205,7 @@ namespace AutoRegistro
                     Placa = placa,
                     KmTrocaOleo = int.Parse(oleo),
                     KmAtual = int.Parse(kmAtual),
-                    IdAutoEscola= int.Parse(ApplicationState.TokenData.IdUsuario)
+                    IdAutoEscola = int.Parse(ApplicationState.TokenData.IdUsuario)
                 };
 
                 if (!_veiculoController.ExisteVeiculo(veiculoNovo.Placa))
@@ -216,7 +216,7 @@ namespace AutoRegistro
 
                     foreach (var veiculo in veiculos)
                     {
-                        dataGridView1.Rows.Add(veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
+                        dataGridView1.Rows.Add(veiculo.Id,veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
                        veiculo.KmTrocaOleo);
                     }
                     dataGridView1.Refresh();
@@ -225,7 +225,7 @@ namespace AutoRegistro
                 {
                     MessageBox.Show("Veiculo ja existe, e não pode ser cadastrado!");
                 }
-               
+
             }
         }
 
