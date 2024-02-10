@@ -21,12 +21,12 @@ namespace AutoRegistro.Controllers
             this._IaplicacaoAutoEscola = aplicacaoAutoEscola ?? throw new ArgumentNullException(nameof(aplicacaoAutoEscola));
         }
 
-        public async Task<TokenData> CriarToken(Login login)
+        public  TokenData CriarToken(Login login)
         {
-            var resultado = await _IaplicacaoAutoEscola.ExisteAutoEscola(login.Nome, login.Senha);
+            var resultado =  _IaplicacaoAutoEscola.ExisteAutoEscola(login.Nome, login.Senha);
             if (resultado)
             {
-                var idUsuario = await _IaplicacaoAutoEscola.RetornarIdAutoEscola(login.Nome);
+                var idUsuario =  _IaplicacaoAutoEscola.RetornarIdAutoEscola(login.Nome);
 
                 var token = new TokenJwtBuilder()
                      .AddSecurityKey(JwtSecurityKey.Creater("Secret_Key-12345678"))
@@ -50,9 +50,9 @@ namespace AutoRegistro.Controllers
             }
             return null;
         }
-        public async Task<ViewModelAutoEscola> BuscarPorId(int id)
+        public  ViewModelAutoEscola BuscarPorId(int id)
         {
-           var autoEscola = await _IaplicacaoAutoEscola.BuscarPorId(id);
+           var autoEscola =  _IaplicacaoAutoEscola.BuscarPorId(id);
             var resultado = new ViewModelAutoEscola
             {
                 Id = autoEscola.Id,

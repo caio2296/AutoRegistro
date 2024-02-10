@@ -10,7 +10,7 @@ namespace Dominio.Interfaces.InterfacesServicos
 {
     public interface IAutoEscolaServico
     {
-        Task AdicionarAutoEscola(AutoEscola AutoEscola);
+        void AdicionarAutoEscola(AutoEscola AutoEscola);
         Task AtualizarAutoEscola(AutoEscola AutoEscola);
         Task<List<AutoEscola>> BuscarAutoEscolas();
         Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada();

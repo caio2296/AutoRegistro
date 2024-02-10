@@ -11,8 +11,8 @@ namespace Dominio.Interfaces
 {
     public interface IAutoEscola:IGenerico<AutoEscola>
     {
-        Task<bool> ExisteAutoEscola(string nome, string senha);
-        Task<string> RetornarIdAutoEscola(string nome);
+        bool ExisteAutoEscola(string nome, string senha);
+        string RetornarIdAutoEscola(string nome);
         Task<List<AutoEscola>> ListarAutoEscola(Expression<Func<AutoEscola, bool>> exAutoEscola);
         Task<List<AutoEscola>> ListarAutoEscolasCustomizada();
 

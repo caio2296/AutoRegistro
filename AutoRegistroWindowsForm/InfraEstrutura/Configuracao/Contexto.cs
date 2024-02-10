@@ -45,7 +45,7 @@ namespace InfraEstrutura.Configuracao
 
         private string ObterStringConexao()
         {
-            string strcon = @"Data Source=profilecaio.database.windows.net;Initial Catalog=ProfileDb;User Id=caio;Password=zxcasd384!A";
+            string strcon = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutoRegistroDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             return strcon;
         }
     }

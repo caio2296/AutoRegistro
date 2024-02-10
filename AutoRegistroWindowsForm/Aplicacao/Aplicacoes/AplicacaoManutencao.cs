@@ -16,14 +16,14 @@ namespace Aplicacao.Aplicacoes
                 _manutencaoServico = manutencaoServico;
                 _manutencao = manutencao;
         }
-        public async Task Adicionar(Manutencao Objeto)
+        public void Adicionar(Manutencao Objeto)
         {
-            await _manutencao.Adicionar(Objeto);
+             _manutencao.Adicionar(Objeto);
         }
 
-        public async Task AdicionarManutencao(Manutencao manutencao)
+        public void  AdicionarManutencao(Manutencao manutencao)
         {
-            await _manutencaoServico.AdicionarManutencao(manutencao);
+             _manutencaoServico.AdicionarManutencao(manutencao);
         }
 
         public async Task Atualizar(Manutencao Objeto)
@@ -46,9 +46,9 @@ namespace Aplicacao.Aplicacoes
             return await _manutencaoServico.BuscarManutencoesCustomizadas(idVeiculo);
         }
 
-        public async Task<Manutencao> BuscarPorId(int id)
+        public  Manutencao BuscarPorId(int id)
         {
-            return await _manutencao.BuscarPorId(id);
+            return _manutencao.BuscarPorId(id);
         }
 
         public async Task Excluir(Manutencao Objeto)

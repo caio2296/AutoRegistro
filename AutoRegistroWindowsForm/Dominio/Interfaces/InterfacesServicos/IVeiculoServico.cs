@@ -10,9 +10,9 @@ namespace Dominio.Interfaces.InterfacesServicos
 {
     public interface IVeiculoServico
     {
-        Task AdicionarVeiculo(Veiculo veiculo);
+        void AdicionarVeiculo(Veiculo veiculo);
         Task AtualizarVeiculo(Veiculo veiculo);
         Task<List<Veiculo>> BuscarVeiculosPertoTrocarOleo();
-        Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola);
+        List<ModelViewVeiculo> BuscarVeiculosCustomizada(int idAutoEscola);
     }
 }

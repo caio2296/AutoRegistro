@@ -21,6 +21,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
     <PackageReference Include="Unity" Version="5.11.10" />
@@ -29,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Aplicacao\Aplicacao.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />
+    <ProjectReference Include="..\Entidades\Entidades.csproj" />
     <ProjectReference Include="..\InfraEstrutura\InfraEstrutura.csproj" />
   </ItemGroup>
 

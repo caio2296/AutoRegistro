@@ -17,9 +17,9 @@ namespace AutoRegistro.Controllers
                 _IaplicacaoVeiculo = aplicacaoVeiculo;
         }
 
-        public async Task<List<ModelViewVeiculo>> BuscarVeiculosCustomizada(int idAutoEscola)
+        public  List<ModelViewVeiculo> BuscarVeiculosCustomizada(int idAutoEscola)
         {
-            return await _IaplicacaoVeiculo.BuscarVeiculosCustomizada(idAutoEscola);
+            return  _IaplicacaoVeiculo.BuscarVeiculosCustomizada(idAutoEscola);
         }
 
         public async Task AtualizarVeiculo(Veiculo novoVeiculo)
@@ -27,9 +27,13 @@ namespace AutoRegistro.Controllers
              await _IaplicacaoVeiculo.AtualizarVeiculo(novoVeiculo);
         }
 
-        public async Task AdicionarVeiculo(Veiculo veiculo)
+        public void  AdicionarVeiculo(Veiculo veiculo)
         {
-            await _IaplicacaoVeiculo.Adicionar(veiculo);
+             _IaplicacaoVeiculo.Adicionar(veiculo);
+        }
+        public bool ExisteVeiculo(string placa)
+        {
+           return _IaplicacaoVeiculo.ExisteVeiculo(placa);
         }
 
     }

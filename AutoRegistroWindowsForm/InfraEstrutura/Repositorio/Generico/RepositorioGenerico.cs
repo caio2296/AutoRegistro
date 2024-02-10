@@ -18,16 +18,16 @@ namespace InfraEstrutura.Repositorio.Generico
         public RepositorioGenerico()
         {
             _optionBuilder = new DbContextOptionsBuilder<Contexto>()
-            .UseSqlServer("sua_string_de_conexao")
+            .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutoRegistroDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
             .Options;
         }
 
-        public async Task Adicionar(T Objeto)
+        public void Adicionar(T Objeto)
         {
             using (var data = new Contexto(_optionBuilder))
             {
-                await data.Set<T>().AddAsync(Objeto);
-                await data.SaveChangesAsync();
+                 data.Set<T>().Add(Objeto);
+                 data.SaveChanges();
             }
         }
 
@@ -40,12 +40,12 @@ namespace InfraEstrutura.Repositorio.Generico
             }
         }
 
-        public async Task<T?> BuscarPorId(int id)
+        public  T? BuscarPorId(int id)
         {
             using (var data = new Contexto(_optionBuilder))
             {
-                return await data.Set<T>()
-                    .FindAsync(id);
+                return  data.Set<T>()
+                    .Find(id);
             }
         }
 
