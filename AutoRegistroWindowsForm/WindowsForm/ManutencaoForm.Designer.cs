@@ -77,6 +77,7 @@
             btnCadastrar.TabIndex = 24;
             btnCadastrar.Text = "Cadastrar";
             btnCadastrar.UseVisualStyleBackColor = true;
+            btnCadastrar.Click += btnCadastrar_Click;
             // 
             // lblPreco
             // 
@@ -120,7 +121,7 @@
             textPreco.Name = "textPreco";
             textPreco.Size = new Size(227, 27);
             textPreco.TabIndex = 18;
-            textPreco.Text = "Preço";
+            textPreco.Text = "00.00";
             textPreco.TextAlign = HorizontalAlignment.Center;
             textPreco.TextChanged += textPreco_TextChanged;
             // 
@@ -162,6 +163,7 @@
             dateTimePickerCompra.Name = "dateTimePickerCompra";
             dateTimePickerCompra.Size = new Size(227, 27);
             dateTimePickerCompra.TabIndex = 26;
+            dateTimePickerCompra.Value = new DateTime(2024, 1, 1);
             dateTimePickerCompra.ValueChanged += dateTimePickerComprar_ValueChanged;
             // 
             // dateTimePickerInstalacao
@@ -170,6 +172,7 @@
             dateTimePickerInstalacao.Location = new Point(288, 459);
             dateTimePickerInstalacao.Name = "dateTimePickerInstalacao";
             dateTimePickerInstalacao.Size = new Size(227, 27);
+            dateTimePickerInstalacao.Value = new DateTime(2024, 1, 1);
             dateTimePickerInstalacao.TabIndex = 28;
             // 
             // lblInstalacao
@@ -261,6 +264,7 @@
             Editar.Name = "Editar";
             Editar.ReadOnly = true;
             Editar.Text = "Editar";
+            Editar.UseColumnTextForButtonValue = true;
             Editar.Width = 125;
             // 
             // Atualizar
@@ -270,6 +274,7 @@
             Atualizar.Name = "Atualizar";
             Atualizar.ReadOnly = true;
             Atualizar.Text = "Atualizar";
+            Atualizar.UseColumnTextForButtonValue = true;
             Atualizar.Width = 125;
             // 
             // Deletar
@@ -279,6 +284,7 @@
             Deletar.Name = "Deletar";
             Deletar.ReadOnly = true;
             Deletar.Text = "Deletar";
+            Deletar.UseColumnTextForButtonValue = true;
             Deletar.Width = 125;
             // 
             // ManutencaoForm

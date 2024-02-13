@@ -24,7 +24,7 @@ namespace AutoRegistro
         ///  The main entry point for the application.
         /// </summary>
         /// 
-        private static IUnityContainer container;
+        public static IUnityContainer container;
         [STAThread]
         static void Main()
         {
@@ -83,17 +83,21 @@ namespace AutoRegistro
                 var veiculoServico = container.Resolve<VeiculoServico>();
 
                 // Resolução do controlador com injeção de dependência
+                container.RegisterType<AutoEscolaController>();
                 var autoEscolaController = container.Resolve<AutoEscolaController>();
-                container.RegisterInstance(autoEscolaController);
+                //container.RegisterInstance(autoEscolaController);
 
+                container.RegisterType<ManutencaoController>();
                 var ManutencaoController = container.Resolve<ManutencaoController>();
-                container.RegisterInstance(ManutencaoController);
+                //container.RegisterInstance(ManutencaoController);
 
+                container.RegisterType<UsuarioController>();
                 var usuarioController = container.Resolve<UsuarioController>();
-                container.RegisterInstance(usuarioController);
+                //container.RegisterInstance(usuarioController);
 
+                container.RegisterType<VeiculoController>();
                 var veiculoController = container.Resolve<VeiculoController>();
-                container.RegisterInstance(veiculoController);
+                //container.RegisterInstance(veiculoController);
 
                 var mainForm = container.Resolve<Form1>();
                 var formCarros = container.Resolve<FormCarros>();

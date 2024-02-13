@@ -27,12 +27,12 @@ namespace InfraEstrutura.Repositorio
             }
         }
 
-        public Task<List<Manutencao>> ListarManutencoesCustomizada(int idVeiculo)
+        public List<Manutencao> ListarManutencoesCustomizada(int idVeiculo)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
                 var listaManutencao = (from Manutencao in banco.manutencao
-                                       where Manutencao.Id == idVeiculo
+                                       where Manutencao.IdVeiculo == idVeiculo
                                        select new Manutencao
                                        {
                                            Id= Manutencao.Id,
@@ -41,8 +41,9 @@ namespace InfraEstrutura.Repositorio
                                            Preco=Manutencao.Preco,
                                            IdVeiculo=Manutencao.IdVeiculo,
                                            DataDaCompra=Manutencao.DataDaCompra,
-                                           DataDaInstalacao=Manutencao.DataDaInstalacao
-                                       }).AsNoTracking().ToListAsync();
+                                           DataDaInstalacao=Manutencao.DataDaInstalacao,
+                                           
+                                       }).AsNoTracking().ToList();
                 return listaManutencao;
             }
         }

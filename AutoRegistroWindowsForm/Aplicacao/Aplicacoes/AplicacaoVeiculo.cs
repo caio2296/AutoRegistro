@@ -56,9 +56,9 @@ namespace Aplicacao.Aplicacoes
             return await _veiculoServico.BuscarVeiculosPertoTrocarOleo();
         }
 
-        public async Task Excluir(Veiculo Objeto)
+        public void Excluir(Veiculo Objeto)
         {
-             await _veiculo.Excluir(Objeto);
+              _veiculo.Excluir(Objeto);
         }
 
         public async Task<List<Veiculo>> Listar()

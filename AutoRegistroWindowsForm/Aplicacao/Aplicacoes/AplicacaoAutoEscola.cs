@@ -56,9 +56,9 @@ namespace Aplicacao.Aplicacoes
             return  _autoEscola.BuscarPorId(id);
         }
 
-        public async Task Excluir(AutoEscola Objeto)
+        public void Excluir(AutoEscola Objeto)
         {
-            await _autoEscola.Excluir(Objeto);
+             _autoEscola.Excluir(Objeto);
         }
 
         public  bool ExisteAutoEscola(string nome, string senha)

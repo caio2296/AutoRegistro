@@ -24,7 +24,7 @@ namespace Entidades.Entidades
 
         [Column("SLT_IdVeiculo")]
         public int IdVeiculo { get; set; }
-
+        
         public  Veiculo Veiculo { get; set; }
 
     }
