@@ -96,7 +96,7 @@
             textOleo.Name = "textOleo";
             textOleo.Size = new Size(227, 27);
             textOleo.TabIndex = 5;
-            textOleo.Text = "prox de Óleo(Km)";
+            textOleo.Text = "0000000";
             textOleo.TextAlign = HorizontalAlignment.Center;
             textOleo.TextChanged += textOleo_TextChanged;
             textOleo.KeyPress += textOleo_KeyPress;
@@ -110,7 +110,7 @@
             textKmAtual.Name = "textKmAtual";
             textKmAtual.Size = new Size(227, 27);
             textKmAtual.TabIndex = 6;
-            textKmAtual.Text = "KmAtual";
+            textKmAtual.Text = "000000";
             textKmAtual.TextAlign = HorizontalAlignment.Center;
             textKmAtual.TextChanged += textKmAtual_TextChanged;
             textKmAtual.KeyPress += textKmAtual_KeyPress;

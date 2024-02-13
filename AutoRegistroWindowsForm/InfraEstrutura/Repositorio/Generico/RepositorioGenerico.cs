@@ -50,12 +50,12 @@ namespace InfraEstrutura.Repositorio.Generico
         }
 
 
-        public async Task Excluir(T Objeto)
+        public void Excluir(T Objeto)
         {
             using (var data = new Contexto(_optionBuilder))
             {
                 data.Set<T>().Remove(Objeto);
-                await data.SaveChangesAsync();
+                data.SaveChanges();
             }
         }
 

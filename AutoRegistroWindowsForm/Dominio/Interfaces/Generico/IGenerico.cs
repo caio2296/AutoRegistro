@@ -10,7 +10,7 @@ namespace Dominio.Interfaces.Generico
     {
         void Adicionar(T Objeto);
         Task Atualizar(T Objecto);
-        Task Excluir(T Objeto);
+        void Excluir(T Objeto);
         T? BuscarPorId(int id);
         Task<List<T>> Listar();
     }

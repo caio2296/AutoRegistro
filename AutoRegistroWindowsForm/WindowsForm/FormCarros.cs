@@ -2,6 +2,8 @@
 using AutoRegistro.Models;
 using AutoRegistro.Token;
 using Dominio.Interfaces;
+using Dominio.Interfaces.Generico;
+using Dominio.Servicos;
 using Entidades.Entidades;
 using Entidades.Entidades.ViewModel;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -61,13 +63,13 @@ namespace AutoRegistro
                  _autoEscolaController.BuscarPorId(int.Parse(ApplicationState.TokenData.IdUsuario));
             lblAutoEscola.Text = viewModel.NomeAutoEscola;
             // Manipula o evento de clique no botão na coluna "Ação"
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            //dataGridView1.CellContentClick += dataGridView1_CellContentClick;
 
             var veiculos = _veiculoController
                                            .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));
             foreach (var veiculo in veiculos)
             {
-                dataGridView1.Rows.Add(veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
+                dataGridView1.Rows.Add(veiculo.Id,veiculo.Modelo, veiculo.Placa, veiculo.KmAtual,
                veiculo.KmTrocaOleo);
             }
         }
@@ -106,6 +108,7 @@ namespace AutoRegistro
             {
 
                 throw;
+
             }
 
         }
@@ -149,7 +152,13 @@ namespace AutoRegistro
                         KmTrocaOleo = int.Parse(atualizar.Cells[4].Value.ToString())
                     };
                     _veiculoController.AtualizarVeiculo(novoVeiculo);
+                    MessageBox.Show("Veiculo atualizado com sucesso!");
                 }
+                else
+                {
+                    MessageBox.Show("Veículo não pode ser atualizado!");
+                }
+
             }
         }
 
@@ -162,9 +171,33 @@ namespace AutoRegistro
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
                     DataGridViewRow deletar = dataGridView1.Rows[rowIndex];
 
-                    dataGridView1.Rows.RemoveAt(deletar.Index);
-
-                    //Deletar aplicação 
+                    dataGridView1.Rows.Remove(deletar);
+                    var veiculoExcluir = new Veiculo
+                    {
+                        Id = int.Parse(deletar.Cells[0].Value.ToString()),
+                        Modelo = deletar.Cells[1].Value.ToString(),
+                        Placa = deletar.Cells[2].Value.ToString(),
+                        KmAtual = int.Parse(deletar.Cells[3].Value.ToString()),
+                        KmTrocaOleo = int.Parse(deletar.Cells[4].Value.ToString()),
+                        IdAutoEscola = int.Parse(ApplicationState.TokenData.IdUsuario)
+                    };
+                    var manutencaoController = Program.container.Resolve<ManutencaoController>();
+                    var manutencoes = manutencaoController.BuscarManutencoesCustomizadas(veiculoExcluir.Id);
+                    foreach (var manutencao in manutencoes)
+                    {
+                        var manu = new Manutencao
+                        {
+                            Id = manutencao.Id,
+                            NomePeca = manutencao.NomePeca,
+                            Preco = manutencao.Preco,
+                            DataDaCompra = manutencao.DataDaCompra,
+                            DataDaInstalacao = manutencao.DataDaInstalacao,
+                            Fabricante = manutencao.Fabricante,
+                            IdVeiculo = manutencao.IdVeiculo
+                        };
+                        manutencaoController.Excluir(manu);
+                    }
+                    _veiculoController.Excluir(veiculoExcluir);
                 }
             }
         }
@@ -180,8 +213,22 @@ namespace AutoRegistro
                     //pesquisar pelo id do veiculo a lista de manutenções 
                     VeiculoModel.IdVeiculo = int.Parse(manutencao.Cells[0].Value.ToString());
 
-                    ManutencaoForm formManutencao = MainFormInstance.FormManutencaoInstance;
 
+                    var manutencaoController = Program.container.Resolve<ManutencaoController>();
+                    
+
+                    manutencaoController.BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
+                    
+
+                    if (MainFormInstance.FormManutencaoInstance != null)
+                    {
+                        MainFormInstance.FormManutencaoInstance.Close();
+                        MainFormInstance.FormManutencaoInstance.Dispose();
+                        MainFormInstance.FormManutencaoInstance = null;
+                    }
+
+                    ManutencaoForm formManutencao = new ManutencaoForm(manutencaoController);
+                    MainFormInstance.FormManutencaoInstance = formManutencao;
                     formManutencao.Show();
                 }
             }
@@ -210,6 +257,7 @@ namespace AutoRegistro
 
                 if (!_veiculoController.ExisteVeiculo(veiculoNovo.Placa))
                 {
+                    dataGridView1.Rows.Clear();
                     _veiculoController.AdicionarVeiculo(veiculoNovo);
                     var veiculos = _veiculoController
                                               .BuscarVeiculosCustomizada(int.Parse(ApplicationState.TokenData.IdUsuario));

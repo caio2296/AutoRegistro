@@ -1,5 +1,6 @@
 ﻿using Aplicacao.Aplicacoes;
 using Aplicacao.Interfaces;
+using Entidades.Entidades;
 using Entidades.Entidades.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,23 @@ namespace AutoRegistro.Controllers
                 _IaplicacaoManutencao = aplicacaoManutencao;
         }
 
-        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas(int idVeiculo)
+        public  List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo)
         {
-            return await _IaplicacaoManutencao.BuscarManutencoesCustomizadas(idVeiculo);
+            return  _IaplicacaoManutencao.BuscarManutencoesCustomizadas(idVeiculo);
+        }
+
+        public void AdicionarManutencao(Manutencao novaManutencao)
+        {
+            _IaplicacaoManutencao.AdicionarManutencao(novaManutencao);
+        }
+        public void AtualizarManutencao(Manutencao novaManutencao)
+        {
+            _IaplicacaoManutencao.Atualizar(novaManutencao);
+        }
+
+        public void Excluir(Manutencao manutencao)
+        {
+            _IaplicacaoManutencao.Excluir(manutencao);
         }
     }
 }

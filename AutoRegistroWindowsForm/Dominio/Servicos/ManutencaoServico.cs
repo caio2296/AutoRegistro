@@ -46,9 +46,9 @@ namespace Dominio.Servicos
             return await _iManutencao.ListarManutencoes(m=> m.DataDaInstalacao == DateTime.MinValue);
         }
 
-        public async Task<List<ViewModelManutencao>> BuscarManutencoesCustomizadas(int idVeiculo)
+        public  List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo)
         {
-            var listaManutencoesCustomizadas = await _iManutencao.ListarManutencoesCustomizada(idVeiculo);
+            var listaManutencoesCustomizadas = _iManutencao.ListarManutencoesCustomizada(idVeiculo);
 
             var retorno = (from Manutencao in listaManutencoesCustomizadas
                            select new ViewModelManutencao
@@ -58,7 +58,8 @@ namespace Dominio.Servicos
                                Fabricante = Manutencao.Fabricante,
                                Preco = Manutencao.Preco,
                                DataDaCompra = Manutencao.DataDaCompra,
-                               DataDaInstalacao = Manutencao.DataDaInstalacao
+                               DataDaInstalacao = Manutencao.DataDaInstalacao,
+                               IdVeiculo= Manutencao.IdVeiculo
                            }).ToList();
             return retorno;
         }

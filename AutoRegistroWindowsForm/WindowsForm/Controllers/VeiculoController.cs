@@ -35,6 +35,10 @@ namespace AutoRegistro.Controllers
         {
            return _IaplicacaoVeiculo.ExisteVeiculo(placa);
         }
+        public void Excluir(Veiculo Objeto)
+        {
+            _IaplicacaoVeiculo.Excluir(Objeto);
+        }
 
     }
 }
