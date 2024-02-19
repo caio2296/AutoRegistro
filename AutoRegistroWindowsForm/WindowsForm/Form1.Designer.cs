@@ -73,6 +73,8 @@
             textSenha.Size = new Size(227, 27);
             textSenha.TabIndex = 3;
             textSenha.TextAlign = HorizontalAlignment.Center;
+            textSenha.UseSystemPasswordChar = true;
+            textSenha.PasswordChar = '*';
             // 
             // btnAcessar
             // 

@@ -121,6 +121,8 @@ namespace AutoRegistro
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
                     DataGridViewRow dr = dataGridView1.Rows[rowIndex];
 
+                    dataGridView1.Rows[rowIndex].Selected = true;
+
                     textModelo.Text = dr.Cells[1].Value.ToString();
                     textPlaca.Text = dr.Cells[2].Value.ToString();
                     textKmAtual.Text = dr.Cells[3].Value.ToString();
@@ -242,7 +244,7 @@ namespace AutoRegistro
                 textKmAtual.Text != "")
             {
                 string modelo = textModelo.Text.ToUpper();
-                string placa = textPlaca.Text;
+                string placa = textPlaca.Text.ToUpper();
                 string oleo = textOleo.Text;
                 string kmAtual = textKmAtual.Text;
 

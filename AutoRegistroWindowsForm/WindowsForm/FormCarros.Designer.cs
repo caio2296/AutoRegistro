@@ -123,6 +123,7 @@
             textPlaca.Name = "textPlaca";
             textPlaca.Size = new Size(227, 27);
             textPlaca.TabIndex = 7;
+            textPlaca.MaxLength = 7;
             textPlaca.Text = "Placa";
             textPlaca.TextAlign = HorizontalAlignment.Center;
             textPlaca.TextChanged += textPlaca_TextChanged;
