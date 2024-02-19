@@ -4,6 +4,7 @@ using AutoRegistro.Token;
 using Dominio.Interfaces;
 using Dominio.Servicos;
 using Entidades.Entidades;
+using Entidades.Entidades.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,13 +29,52 @@ namespace AutoRegistro
 
         private void ManutencaoForm_Load(object sender, EventArgs e)
         {
-             var manutencaoController = Program.container.Resolve<ManutencaoController>();
-             var manutencoes=manutencaoController.BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
-                    
+            var manutencaoController = Program.container.Resolve<ManutencaoController>();
+            var manutencoes = manutencaoController.BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
+
+            var veiculoController = Program.container.Resolve<VeiculoController>();
+            var placaVeiculo = veiculoController.BuscarPorId(VeiculoModel.IdVeiculo).Placa;
+            lblAutoEscola.Text = placaVeiculo.ToUpper();
+
+            EscreverDatagrid(manutencoes);
+        }
+
+        private void EscreverDatagrid(List<ViewModelManutencao> manutencoes)
+        {
             foreach (var manutencao in manutencoes)
             {
-               dataGridView1.Rows.Add(manutencao.Id, manutencao.NomePeca, manutencao.Fabricante, manutencao.DataDaCompra,
-               manutencao.DataDaInstalacao,manutencao.Preco);
+
+                if (manutencao.DataDaCompra.ToString() == "01/01/2024 00:00:00"
+                    && manutencao.DataDaInstalacao.ToString() == "01/01/2024 00:00:00")
+                {
+                    var s = "";
+                    dataGridView1.Rows.Add(manutencao.Id,
+                        manutencao.NomePeca, manutencao.Fabricante, s,
+                         s, manutencao.Preco);
+
+                }
+                else if (manutencao.DataDaCompra.ToString() == "01/01/2024 00:00:00")
+                {
+                    var s = "";
+                    dataGridView1.Rows.Add(manutencao.Id,
+                        manutencao.NomePeca, manutencao.Fabricante, s,
+                        manutencao.DataDaInstalacao, manutencao.Preco);
+
+                }
+                else if (manutencao.DataDaInstalacao.ToString() == "01/01/2024 00:00:00")
+                {
+                    var s = "";
+                    dataGridView1.Rows.Add(manutencao.Id,
+                        manutencao.NomePeca, manutencao.Fabricante, manutencao.DataDaCompra,
+                        s, manutencao.Preco);
+                }
+                else
+                {
+                    dataGridView1.Rows.Add(manutencao.Id,
+                     manutencao.NomePeca, manutencao.Fabricante, manutencao.DataDaCompra,
+                     manutencao.DataDaInstalacao, manutencao.Preco);
+                }
+
             }
         }
 
@@ -63,10 +103,27 @@ namespace AutoRegistro
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
                     DataGridViewRow dr = dataGridView1.Rows[rowIndex];
 
+                    dataGridView1.Rows[rowIndex].Selected = true;
+
                     textPNome.Text = dr.Cells[1].Value.ToString();
                     txtFabricante.Text = dr.Cells[2].Value.ToString();
-                    dateTimePickerCompra.Text = dr.Cells[3].Value.ToString();
-                    dateTimePickerInstalacao.Text = dr.Cells[4].Value.ToString();
+                    if (dr.Cells[3].Value == null || string.IsNullOrWhiteSpace(dr.Cells[3].Value.ToString()))
+                    {
+                        // Se estiver vazio, mantém o valor padrão
+                        dateTimePickerCompra.Value = new DateTime(2024, 1, 1);
+                    }
+                    else
+                    {
+                        dateTimePickerCompra.Text = dr.Cells[3].Value.ToString();
+                    }
+                    if (dr.Cells[4].Value == null || string.IsNullOrWhiteSpace(dr.Cells[3].Value.ToString()))
+                    {
+                        dateTimePickerInstalacao.Value = new DateTime(2024, 1, 1);
+                    }
+                    else
+                    {
+                        dateTimePickerInstalacao.Text = dr.Cells[4].Value.ToString();
+                    }
                     textPreco.Text = dr.Cells[5].Value.ToString();
 
                 }
@@ -99,7 +156,13 @@ namespace AutoRegistro
                         IdVeiculo = VeiculoModel.IdVeiculo
                     };
                     var manutencaoController = Program.container.Resolve<ManutencaoController>();
+                    dataGridView1.Rows.Clear();
                     manutencaoController.AtualizarManutencao(novaManutencao);
+                    var manutencoes = manutencaoController
+                    .BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
+
+                    EscreverDatagrid(manutencoes);
+                    dataGridView1.Refresh();
                     MessageBox.Show("Manutenção atualizado com sucesso!");
                 }
                 else
@@ -119,17 +182,64 @@ namespace AutoRegistro
                     int rowIndex = dataGridView1.CurrentCell.RowIndex;
                     DataGridViewRow deletar = dataGridView1.Rows[rowIndex];
 
+                    Manutencao manutencaoExcluir;
                     dataGridView1.Rows.Remove(deletar);
-                    var manutencaoExcluir = new Manutencao
-                    {      
-                     Id = int.Parse(deletar.Cells[0].Value.ToString()),
-                     NomePeca = deletar.Cells[1].Value.ToString(),
-                     Fabricante = deletar.Cells[2].Value.ToString(),
-                     DataDaCompra = DateTime.Parse(deletar.Cells[3].Value.ToString()),
-                     DataDaInstalacao = DateTime.Parse( deletar.Cells[4].Value.ToString()),
-                     Preco = decimal.Parse(deletar.Cells[5].Value.ToString()),
-                     IdVeiculo= VeiculoModel.IdVeiculo 
-                    };
+                    if (deletar.Cells[3].Value == null 
+                        && deletar.Cells[4].Value != null )
+                    {
+                        var s = "a";
+                         manutencaoExcluir = new Manutencao
+                        {
+                            Id = int.Parse(deletar.Cells[0].Value.ToString()),
+                            NomePeca = deletar.Cells[1].Value.ToString(),
+                            Fabricante = deletar.Cells[2].Value.ToString(),
+                            DataDaCompra = new DateTime(2024, 1, 1),
+                            DataDaInstalacao = DateTime.Parse(deletar.Cells[4].Value.ToString()),
+                            Preco = decimal.Parse(deletar.Cells[5].Value.ToString()),
+                            IdVeiculo = VeiculoModel.IdVeiculo
+                        };
+                    }else if((deletar.Cells[3].Value == null )
+                        &&deletar.Cells[4].Value != null)
+                    {
+                        manutencaoExcluir = new Manutencao
+                        {
+                            Id = int.Parse(deletar.Cells[0].Value.ToString()),
+                            NomePeca = deletar.Cells[1].Value.ToString(),
+                            Fabricante = deletar.Cells[2].Value.ToString(),
+                            DataDaCompra = DateTime.Parse(deletar.Cells[3].Value.ToString()),
+                            DataDaInstalacao = DateTime.Parse(new DateTime(2024, 1, 1).ToString()),
+                            Preco = decimal.Parse(deletar.Cells[5].Value.ToString()),
+                            IdVeiculo = VeiculoModel.IdVeiculo
+                        };
+                    }else if ((deletar.Cells[3].Value != null)
+                        && deletar.Cells[4].Value != null)
+                    {
+                        manutencaoExcluir = new Manutencao
+                        {
+                            Id = int.Parse(deletar.Cells[0].Value.ToString()),
+                            NomePeca = deletar.Cells[1].Value.ToString(),
+                            Fabricante = deletar.Cells[2].Value.ToString(),
+                            DataDaCompra = DateTime.Parse(new DateTime(2024, 1, 1).ToString()),
+                            DataDaInstalacao = DateTime.Parse(new DateTime(2024, 1, 1).ToString()),
+                            Preco = decimal.Parse(deletar.Cells[5].Value.ToString()),
+                            IdVeiculo = VeiculoModel.IdVeiculo
+                        };
+                    }
+                    else
+                    {
+                        manutencaoExcluir = new Manutencao
+                        {
+                            Id = int.Parse(deletar.Cells[0].Value.ToString()),
+                            NomePeca = deletar.Cells[1].Value.ToString(),
+                            Fabricante = deletar.Cells[2].Value.ToString(),
+                            DataDaCompra = DateTime.Parse(deletar.Cells[3].Value.ToString()),
+                            DataDaInstalacao = DateTime.Parse(deletar.Cells[4].Value.ToString()),
+                            Preco = decimal.Parse(deletar.Cells[5].Value.ToString()),
+                            IdVeiculo = VeiculoModel.IdVeiculo
+                        };
+                    }
+
+                   
                     var manutencaoController = Program.container.Resolve<ManutencaoController>();
                     manutencaoController.Excluir(manutencaoExcluir);
                 }
@@ -168,11 +278,7 @@ namespace AutoRegistro
                 var manutencoes = manutencaoController
                     .BuscarManutencoesCustomizadas(VeiculoModel.IdVeiculo);
 
-                foreach (var manutencao in manutencoes)
-                {
-                    dataGridView1.Rows.Add(manutencao.Id, manutencao.NomePeca, manutencao.Fabricante, manutencao.DataDaCompra,
-                    manutencao.DataDaInstalacao, manutencao.Preco);
-                }
+                EscreverDatagrid(manutencoes);
                 dataGridView1.Refresh();
                 
 

@@ -1,4 +1,5 @@
-﻿using Aplicacao.Interfaces;
+﻿using Aplicacao.Aplicacoes;
+using Aplicacao.Interfaces;
 using Entidades.Entidades;
 using Entidades.Entidades.ViewModel;
 using System;
@@ -38,6 +39,16 @@ namespace AutoRegistro.Controllers
         public void Excluir(Veiculo Objeto)
         {
             _IaplicacaoVeiculo.Excluir(Objeto);
+        }
+        public ModelViewVeiculo BuscarPorId(int id)
+        {
+            var veiculo = _IaplicacaoVeiculo.BuscarPorId(id);
+            var resultado = new ModelViewVeiculo
+            {
+                Id = veiculo.Id,
+                Placa = veiculo.Placa
+            };
+            return resultado;
         }
 
     }

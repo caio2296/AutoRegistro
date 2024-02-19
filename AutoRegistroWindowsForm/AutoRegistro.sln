@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entidades", "Entidades\Entidades.csproj", "{B8D63CC3-45DE-4A62-ABC4-9FBA28EC64EC}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AutoRegistroSetup", "AutoRegistroSetup\AutoRegistroSetup.vdproj", "{72F8207B-627D-4E3D-BE93-A7D3A6B06FEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,8 @@ Global
 		{B8D63CC3-45DE-4A62-ABC4-9FBA28EC64EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8D63CC3-45DE-4A62-ABC4-9FBA28EC64EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8D63CC3-45DE-4A62-ABC4-9FBA28EC64EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72F8207B-627D-4E3D-BE93-A7D3A6B06FEE}.Debug|Any CPU.ActiveCfg = Debug
+		{72F8207B-627D-4E3D-BE93-A7D3A6B06FEE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
