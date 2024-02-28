@@ -11,8 +11,8 @@ namespace Dominio.Interfaces.InterfacesServicos
     public interface IAutoEscolaServico
     {
         void AdicionarAutoEscola(AutoEscola AutoEscola);
-        Task AtualizarAutoEscola(AutoEscola AutoEscola);
-        Task<List<AutoEscola>> BuscarAutoEscolas();
-        Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada();
+        void AtualizarAutoEscola(AutoEscola AutoEscola);
+        List<AutoEscola> BuscarAutoEscolas();
+        List<ViewModelAutoEscola> BuscarAutoEscolaCustomizada();
     }
 }

@@ -13,8 +13,8 @@ namespace Dominio.Interfaces
     {
         bool ExisteAutoEscola(string nome, string senha);
         string RetornarIdAutoEscola(string nome);
-        Task<List<AutoEscola>> ListarAutoEscola(Expression<Func<AutoEscola, bool>> exAutoEscola);
-        Task<List<AutoEscola>> ListarAutoEscolasCustomizada();
+        List<AutoEscola> ListarAutoEscola(Expression<Func<AutoEscola, bool>> exAutoEscola);
+        List<AutoEscola> ListarAutoEscolasCustomizada();
 
     }
 }

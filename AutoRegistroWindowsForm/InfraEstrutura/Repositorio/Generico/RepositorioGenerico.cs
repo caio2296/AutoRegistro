@@ -18,7 +18,7 @@ namespace InfraEstrutura.Repositorio.Generico
         public RepositorioGenerico()
         {
             _optionBuilder = new DbContextOptionsBuilder<Contexto>()
-            .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutoRegistroDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+            .UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
             .Options;
         }
 
@@ -31,12 +31,12 @@ namespace InfraEstrutura.Repositorio.Generico
             }
         }
 
-        public async Task Atualizar(T Objeto)
+        public void  Atualizar(T Objeto)
         {
             using (var data = new Contexto(_optionBuilder))
             {
                 data.Set<T>().Update(Objeto);
-                await data.SaveChangesAsync();
+                data.SaveChanges();
             }
         }
 
@@ -59,11 +59,11 @@ namespace InfraEstrutura.Repositorio.Generico
             }
         }
 
-        public async Task<List<T>> Listar()
+        public List<T> Listar()
         {
             using (var data = new Contexto(_optionBuilder))
             {
-                return await data.Set<T>().AsNoTracking().ToListAsync();
+                return data.Set<T>().AsNoTracking().ToList();
             }
         }
 

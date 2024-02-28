@@ -26,19 +26,19 @@ namespace Aplicacao.Aplicacoes
              _manutencaoServico.AdicionarManutencao(manutencao);
         }
 
-        public async Task Atualizar(Manutencao Objeto)
+        public void Atualizar(Manutencao Objeto)
         {
-          await _manutencao.Atualizar(Objeto);
+           _manutencao.Atualizar(Objeto);
         }   
 
-        public async Task AtualizarManutencao(Manutencao manutencao)
+        public  void AtualizarManutencao(Manutencao manutencao)
         {
-            await _manutencaoServico.AtualizarManutencao(manutencao);
+             _manutencaoServico.AtualizarManutencao(manutencao);
         }
 
-        public async Task<List<Manutencao>> BuscarManutencoes()
+        public List<Manutencao> BuscarManutencoes()
         {
-            return await _manutencaoServico.BuscarManutencoes();
+            return  _manutencaoServico.BuscarManutencoes();
         }
 
         public  List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo)
@@ -56,9 +56,9 @@ namespace Aplicacao.Aplicacoes
              _manutencao.Excluir(Objeto);
         }
 
-        public async Task<List<Manutencao>> Listar()
+        public List<Manutencao> Listar()
         {
-            return await _manutencao.Listar();
+            return  _manutencao.Listar();
         }
     }
 }

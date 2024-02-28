@@ -13,8 +13,8 @@ namespace Aplicacao.Interfaces
     public interface IAplicacaoManutencao:IGenericaAplicacao<Manutencao>
     {
         void AdicionarManutencao(Manutencao manutencao);
-        Task AtualizarManutencao(Manutencao manutencao);
-        Task<List<Manutencao>> BuscarManutencoes();
+        void AtualizarManutencao(Manutencao manutencao);
+        List<Manutencao> BuscarManutencoes();
         List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo);
     }
 }

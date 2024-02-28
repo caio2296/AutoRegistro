@@ -11,8 +11,8 @@ namespace Dominio.Interfaces.InterfacesServicos
     public interface IManutencaoServico
     {
         void AdicionarManutencao(Manutencao manutencao);
-        Task AtualizarManutencao(Manutencao manutencao);
-        Task<List<Manutencao>> BuscarManutencoes();
+        void AtualizarManutencao(Manutencao manutencao);
+        List<Manutencao> BuscarManutencoes();
         List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo);
     }
 }

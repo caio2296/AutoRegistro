@@ -14,7 +14,7 @@ namespace Aplicacao.Interfaces
     {
         void AdicionarVeiculo(Veiculo veiculo);
         bool ExisteVeiculo(string placa);
-        Task AtualizarVeiculo(Veiculo veiculo);
+        void AtualizarVeiculo(Veiculo veiculo);
         Task<List<Veiculo>> BuscarVeiculosPertoTrocarOleo();
         List<ModelViewVeiculo> BuscarVeiculosCustomizada(int idAutoEscola);
     }
