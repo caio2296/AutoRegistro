@@ -13,9 +13,9 @@ namespace Aplicacao.Interfaces
     public interface IAplicacaoAutoEscola:IGenericaAplicacao<AutoEscola>
     {
         void AdicionarAutoEscola(AutoEscola AutoEscola);
-        Task AtualizarAutoEscola(AutoEscola AutoEscola);
-        Task<List<AutoEscola>> BuscarAutoEscolas();
-        Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada();
+        void AtualizarAutoEscola(AutoEscola AutoEscola);
+        List<AutoEscola> BuscarAutoEscolas();
+        List<ViewModelAutoEscola> BuscarAutoEscolaCustomizada();
         bool ExisteAutoEscola(string nome, string senha);
         string RetornarIdAutoEscola(string nome);
     }

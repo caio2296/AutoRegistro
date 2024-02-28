@@ -1,4 +1,5 @@
 ﻿using Entidades.Entidades;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace InfraEstrutura.Configuracao
 {
@@ -39,13 +41,13 @@ namespace InfraEstrutura.Configuracao
             builder.Entity<Manutencao>().ToTable("Manutencao")
                 .HasOne(v=> v.Veiculo)
                 .WithMany(m=>m.Manutencoes);
-
             base.OnModelCreating(builder);
         }
 
         private string ObterStringConexao()
         {
-            string strcon = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutoRegistroDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string strcon =
+                "Server = tcp:profilecaio.database.windows.net,1433; Initial Catalog = AutoRegistro; Persist Security Info = False; User ID = caio; Password =zxcasd384!A; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30";
             return strcon;
         }
     }

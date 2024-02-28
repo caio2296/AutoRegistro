@@ -19,15 +19,15 @@ namespace InfraEstrutura.Repositorio
         {
                 _optionsBuilder= new DbContextOptions<Contexto>();
         }
-        public async Task<List<AutoEscola>> ListarAutoEscola(Expression<Func<AutoEscola, bool>> exAutoEscola)
+        public List<AutoEscola> ListarAutoEscola(Expression<Func<AutoEscola, bool>> exAutoEscola)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
-                return await banco.autoEscolas.Where(exAutoEscola).AsNoTracking().ToListAsync();
+                return  banco.autoEscolas.Where(exAutoEscola).AsNoTracking().ToList();
             }
         }
 
-        public Task<List<AutoEscola>> ListarAutoEscolasCustomizada()
+        public List<AutoEscola> ListarAutoEscolasCustomizada()
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
@@ -37,7 +37,7 @@ namespace InfraEstrutura.Repositorio
                                             Id=AutoEscola.Id,
                                             NomeAutoEscola=AutoEscola.NomeAutoEscola,
                                             Senha =AutoEscola.Senha
-                                        }).AsNoTracking().ToListAsync();
+                                        }).AsNoTracking().ToList();
                 return listarAutoEscola;
             }
         }
