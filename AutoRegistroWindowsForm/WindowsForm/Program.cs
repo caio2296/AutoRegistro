@@ -41,71 +41,80 @@ namespace AutoRegistro
 
             using (var dbContext = new Contexto(dbContextOptions))
             {
-                dbContext.Database.Migrate();
+                try
+                {
+                    //dbContext.Database.Migrate();
 
-                container.RegisterInstance(dbContext);
-
-
-
-                container.RegisterSingleton(typeof(IGenerico<>), typeof(RepositorioGenerico<>));
-                container.RegisterSingleton<IUsuario, RepositorioUsuario>();
-                container.RegisterSingleton<IAutoEscola, RepositorioAutoEscola>();
-                container.RegisterSingleton<IManutencao, RepositorioManutencao>();
-                container.RegisterSingleton<IVeiculo, RepositorioVeiculo>();
-
-                // Configuração da injeção de dependência
-                container.RegisterSingleton<IAutoEscolaServico, AutoEscolaServico>();
-                container.RegisterSingleton<IManutencaoServico, ManutencaoServico>();
-                container.RegisterSingleton<IVeiculoServico, VeiculoServico>();
-
-                container.RegisterSingleton<IAplicacaoAutoEscola, AplicacaoAutoEscola>();
-                container.RegisterSingleton<IAplicacaoManutencao, AplicacaoManutencao>();
-                container.RegisterSingleton<IAplicacaoVeiculo, AplicacaoVeiculo>();
-                container.RegisterSingleton<IAplicacaoUsuario, AplicacaoUsuario>();
+                    container.RegisterInstance(dbContext);
 
 
 
+                    container.RegisterSingleton(typeof(IGenerico<>), typeof(RepositorioGenerico<>));
+                    container.RegisterSingleton<IUsuario, RepositorioUsuario>();
+                    container.RegisterSingleton<IAutoEscola, RepositorioAutoEscola>();
+                    container.RegisterSingleton<IManutencao, RepositorioManutencao>();
+                    container.RegisterSingleton<IVeiculo, RepositorioVeiculo>();
 
-                // Resolva instâncias específicas
-                var usuarioRepositorio = container.Resolve<IUsuario>();
-                var autoEscolaRepositorio = container.Resolve<IAutoEscola>();
-                var manutencaoRepositorio = container.Resolve<IManutencao>();
-                var veiculoRepositorio = container.Resolve<IVeiculo>();
+                    // Configuração da injeção de dependência
+                    container.RegisterSingleton<IAutoEscolaServico, AutoEscolaServico>();
+                    container.RegisterSingleton<IManutencaoServico, ManutencaoServico>();
+                    container.RegisterSingleton<IVeiculoServico, VeiculoServico>();
 
-                // Resolva instâncias genéricas com argumentos específicos
-                var repositorioUsuario = container.Resolve<IGenerico<Usuario>>();
-                var repositorioAutoEscola = container.Resolve<IGenerico<AutoEscola>>();
-                var repositorioManutencao = container.Resolve<IGenerico<Manutencao>>();
-                var repositorioVeiculo = container.Resolve<IGenerico<Veiculo>>();
+                    container.RegisterSingleton<IAplicacaoAutoEscola, AplicacaoAutoEscola>();
+                    container.RegisterSingleton<IAplicacaoManutencao, AplicacaoManutencao>();
+                    container.RegisterSingleton<IAplicacaoVeiculo, AplicacaoVeiculo>();
+                    container.RegisterSingleton<IAplicacaoUsuario, AplicacaoUsuario>();
 
-                var autoEscolaServico = container.Resolve<AutoEscolaServico>();
-                var manutencaoServico = container.Resolve<ManutencaoServico>();
-                var veiculoServico = container.Resolve<VeiculoServico>();
 
-                // Resolução do controlador com injeção de dependência
-                container.RegisterType<AutoEscolaController>();
-                var autoEscolaController = container.Resolve<AutoEscolaController>();
-                //container.RegisterInstance(autoEscolaController);
 
-                container.RegisterType<ManutencaoController>();
-                var ManutencaoController = container.Resolve<ManutencaoController>();
-                //container.RegisterInstance(ManutencaoController);
 
-                container.RegisterType<UsuarioController>();
-                var usuarioController = container.Resolve<UsuarioController>();
-                //container.RegisterInstance(usuarioController);
+                    // Resolva instâncias específicas
+                    var usuarioRepositorio = container.Resolve<IUsuario>();
+                    var autoEscolaRepositorio = container.Resolve<IAutoEscola>();
+                    var manutencaoRepositorio = container.Resolve<IManutencao>();
+                    var veiculoRepositorio = container.Resolve<IVeiculo>();
 
-                container.RegisterType<VeiculoController>();
-                var veiculoController = container.Resolve<VeiculoController>();
-                //container.RegisterInstance(veiculoController);
+                    // Resolva instâncias genéricas com argumentos específicos
+                    var repositorioUsuario = container.Resolve<IGenerico<Usuario>>();
+                    var repositorioAutoEscola = container.Resolve<IGenerico<AutoEscola>>();
+                    var repositorioManutencao = container.Resolve<IGenerico<Manutencao>>();
+                    var repositorioVeiculo = container.Resolve<IGenerico<Veiculo>>();
 
-                var mainForm = container.Resolve<Form1>();
-                var formCarros = container.Resolve<FormCarros>();
-                var formManutencao = container.Resolve<ManutencaoForm>();
-                formCarros.MainFormInstance = mainForm;
-                mainForm.FormCarrosInstance = formCarros;
-                mainForm.FormManutencaoInstance = formManutencao;
-                Application.Run(mainForm);
+                    var autoEscolaServico = container.Resolve<AutoEscolaServico>();
+                    var manutencaoServico = container.Resolve<ManutencaoServico>();
+                    var veiculoServico = container.Resolve<VeiculoServico>();
+
+                    // Resolução do controlador com injeção de dependência
+                    container.RegisterType<AutoEscolaController>();
+                    var autoEscolaController = container.Resolve<AutoEscolaController>();
+                    //container.RegisterInstance(autoEscolaController);
+
+                    container.RegisterType<ManutencaoController>();
+                    var ManutencaoController = container.Resolve<ManutencaoController>();
+                    //container.RegisterInstance(ManutencaoController);
+
+                    container.RegisterType<UsuarioController>();
+                    var usuarioController = container.Resolve<UsuarioController>();
+                    //container.RegisterInstance(usuarioController);
+
+                    container.RegisterType<VeiculoController>();
+                    var veiculoController = container.Resolve<VeiculoController>();
+                    //container.RegisterInstance(veiculoController);
+
+                    var mainForm = container.Resolve<Form1>();
+                    var formCarros = container.Resolve<FormCarros>();
+                    var formManutencao = container.Resolve<ManutencaoForm>();
+                    formCarros.MainFormInstance = mainForm;
+                    mainForm.FormCarrosInstance = formCarros;
+                    mainForm.FormManutencaoInstance = formManutencao;
+                    Application.Run(mainForm);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show(ex.Message);
+                }
+              
             }
         }
     }
