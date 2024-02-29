@@ -28,22 +28,21 @@ namespace AutoRegistro
         [STAThread]
         static void Main()
         {
-
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-
-            container = new UnityContainer();
-            var dbContextOptions = new DbContextOptionsBuilder<Contexto>()
-                .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AutoRegistroDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-                .Options;
-
-
-            using (var dbContext = new Contexto(dbContextOptions))
+            try
             {
-                try
+                // To customize application configuration such as set high DPI settings or default font,
+                // see https://aka.ms/applicationconfiguration.
+                ApplicationConfiguration.Initialize();
+
+                container = new UnityContainer();
+                var dbContextOptions = new DbContextOptionsBuilder<Contexto>()
+                    .UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
+                    .Options;
+
+
+                using (var dbContext = new Contexto(dbContextOptions))
                 {
-                    //dbContext.Database.Migrate();
+                    dbContext.Database.Migrate();
 
                     container.RegisterInstance(dbContext);
 
@@ -109,13 +108,13 @@ namespace AutoRegistro
                     mainForm.FormManutencaoInstance = formManutencao;
                     Application.Run(mainForm);
                 }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show(ex.Message);
-                }
-              
             }
+            catch (Exception ex)
+            {
+
+                throw new Exception("Ocorreu um erro durante a inicialização do aplicativo: " + ex.Message); ;
+            }
+          
         }
     }
 }

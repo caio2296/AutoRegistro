@@ -19,11 +19,11 @@ namespace InfraEstrutura.Repositorio
         {
                 _optionsBuilder = new DbContextOptions<Contexto>();
         }
-        public async Task<List<Manutencao>> ListarManutencoes(Expression<Func<Manutencao, bool>> exManutencao)
+        public List<Manutencao> ListarManutencoes(Expression<Func<Manutencao, bool>> exManutencao)
         {
             using (var banco = new Contexto(_optionsBuilder))
             {
-                return await banco.manutencao.Where(exManutencao).AsNoTracking().ToListAsync();
+                return  banco.manutencao.Where(exManutencao).AsNoTracking().ToList();
             }
         }
 

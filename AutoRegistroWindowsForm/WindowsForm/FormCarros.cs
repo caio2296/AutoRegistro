@@ -151,7 +151,8 @@ namespace AutoRegistro
                         Modelo = atualizar.Cells[1].Value.ToString(),
                         Placa = atualizar.Cells[2].Value.ToString(),
                         KmAtual = int.Parse(atualizar.Cells[3].Value.ToString()),
-                        KmTrocaOleo = int.Parse(atualizar.Cells[4].Value.ToString())
+                        KmTrocaOleo = int.Parse(atualizar.Cells[4].Value.ToString()),
+                        IdAutoEscola= int.Parse(ApplicationState.TokenData.IdUsuario)
                     };
                     _veiculoController.AtualizarVeiculo(novoVeiculo);
                     MessageBox.Show("Veiculo atualizado com sucesso!");
@@ -270,6 +271,7 @@ namespace AutoRegistro
                        veiculo.KmTrocaOleo);
                     }
                     dataGridView1.Refresh();
+                    MessageBox.Show("Veiculo cadastrado com sucesso!");
                 }
                 else
                 {

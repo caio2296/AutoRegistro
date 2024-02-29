@@ -29,7 +29,7 @@ namespace Dominio.Servicos
             }
         }
 
-        public async Task AtualizarManutencao(Manutencao manutencao)
+        public void AtualizarManutencao(Manutencao manutencao)
         {
             var validarPeca = manutencao.ValidarPropriedadeString(manutencao.NomePeca, "Nome da Peca");
             var validarPreco = manutencao.ValidarPropriedadeDecimal(manutencao.Preco, "Preço");
@@ -37,13 +37,13 @@ namespace Dominio.Servicos
             if (validarPeca && validarPreco && validarFabricante)
             {
 
-                await _iManutencao.Atualizar(manutencao);
+                 _iManutencao.Atualizar(manutencao);
             }
         }
 
-        public async Task<List<Manutencao>> BuscarManutencoes()
+        public List<Manutencao> BuscarManutencoes()
         {
-            return await _iManutencao.ListarManutencoes(m=> m.DataDaInstalacao == DateTime.MinValue);
+            return _iManutencao.ListarManutencoes(m=> m.DataDaInstalacao == DateTime.MinValue);
         }
 
         public  List<ViewModelManutencao> BuscarManutencoesCustomizadas(int idVeiculo)

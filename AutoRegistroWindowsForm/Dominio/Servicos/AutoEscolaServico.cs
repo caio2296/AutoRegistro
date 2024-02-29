@@ -28,19 +28,19 @@ namespace Dominio.Servicos
             }
         }
 
-        public async Task AtualizarAutoEscola(AutoEscola AutoEscola)
+        public void AtualizarAutoEscola(AutoEscola AutoEscola)
         {
             var validarNome = AutoEscola.ValidarPropriedadeString(AutoEscola.NomeAutoEscola, "Nome da AutoEscola");
             var validarSenha = AutoEscola.ValidarPropriedadeString(AutoEscola.Senha, "Senha");
             if (validarNome && validarSenha)
             {
-                await _IAutoEscola.Atualizar(AutoEscola);
+                 _IAutoEscola.Atualizar(AutoEscola);
             }
         }
 
-        public async Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada()
+        public List<ViewModelAutoEscola> BuscarAutoEscolaCustomizada()
         {
-            var listaCustomizada = await _IAutoEscola.ListarAutoEscolasCustomizada();
+            var listaCustomizada =  _IAutoEscola.ListarAutoEscolasCustomizada();
 
             var retorno = (from AutoEscola in listaCustomizada
                            select new ViewModelAutoEscola
@@ -51,7 +51,7 @@ namespace Dominio.Servicos
             return retorno;
         }
 #warning buscar Auto Escolas
-        public Task<List<AutoEscola>> BuscarAutoEscolas()
+        public List<AutoEscola> BuscarAutoEscolas()
         {
             throw new NotImplementedException();
         }

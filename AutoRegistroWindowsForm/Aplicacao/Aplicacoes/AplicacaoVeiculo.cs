@@ -31,14 +31,14 @@ namespace Aplicacao.Aplicacoes
              _veiculoServico.AdicionarVeiculo(veiculo);
         }
 
-        public async Task Atualizar(Veiculo Objeto)
+        public void Atualizar(Veiculo Objeto)
         {
-            await _veiculo.Atualizar(Objeto);
+             _veiculo.Atualizar(Objeto);
         }
 
-        public async Task AtualizarVeiculo(Veiculo veiculo)
+        public  void AtualizarVeiculo(Veiculo veiculo)
         {
-            await _veiculoServico.AtualizarVeiculo(veiculo);
+            _veiculoServico.AtualizarVeiculo(veiculo);
         }
 
         public  Veiculo BuscarPorId(int id)
@@ -61,9 +61,9 @@ namespace Aplicacao.Aplicacoes
               _veiculo.Excluir(Objeto);
         }
 
-        public async Task<List<Veiculo>> Listar()
+        public List<Veiculo> Listar()
         {
-           return await _veiculo.Listar();
+           return _veiculo.Listar();
         }
 
         public bool ExisteVeiculo(string placa)

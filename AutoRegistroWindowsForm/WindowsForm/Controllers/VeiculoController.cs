@@ -23,9 +23,9 @@ namespace AutoRegistro.Controllers
             return  _IaplicacaoVeiculo.BuscarVeiculosCustomizada(idAutoEscola);
         }
 
-        public async Task AtualizarVeiculo(Veiculo novoVeiculo)
+        public void AtualizarVeiculo(Veiculo novoVeiculo)
         {
-             await _IaplicacaoVeiculo.AtualizarVeiculo(novoVeiculo);
+             _IaplicacaoVeiculo.AtualizarVeiculo(novoVeiculo);
         }
 
         public void  AdicionarVeiculo(Veiculo veiculo)

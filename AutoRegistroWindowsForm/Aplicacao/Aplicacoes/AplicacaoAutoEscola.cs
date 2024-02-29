@@ -31,24 +31,24 @@ namespace Aplicacao.Aplicacoes
              _autoEscolaServico.AdicionarAutoEscola(AutoEscola);
         }
 
-        public async Task Atualizar(AutoEscola Objeto)
+        public void Atualizar(AutoEscola Objeto)
         {
-            await _autoEscola.Atualizar(Objeto);
+             _autoEscola.Atualizar(Objeto);
         }
 
-        public async Task AtualizarAutoEscola(AutoEscola AutoEscola)
+        public void AtualizarAutoEscola(AutoEscola AutoEscola)
         {
-            await _autoEscolaServico.AtualizarAutoEscola(AutoEscola);
+            _autoEscolaServico.AtualizarAutoEscola(AutoEscola);
         }
 
-        public async Task<List<ViewModelAutoEscola>> BuscarAutoEscolaCustomizada()
+        public List<ViewModelAutoEscola> BuscarAutoEscolaCustomizada()
         {
-            return await _autoEscolaServico.BuscarAutoEscolaCustomizada();
+            return _autoEscolaServico.BuscarAutoEscolaCustomizada();
         }
 
-        public async Task<List<AutoEscola>> BuscarAutoEscolas()
+        public  List<AutoEscola> BuscarAutoEscolas()
         {
-            return await _autoEscolaServico.BuscarAutoEscolas();
+           return _autoEscolaServico.BuscarAutoEscolas();
         }
 
         public  AutoEscola BuscarPorId(int id)
@@ -66,9 +66,9 @@ namespace Aplicacao.Aplicacoes
             return  _autoEscola.ExisteAutoEscola(nome, senha);
         }
 
-        public async Task<List<AutoEscola>> Listar()
+        public  List<AutoEscola> Listar()
         {
-            return await _autoEscola.Listar();
+            return  _autoEscola.Listar();
         }
 
         public string RetornarIdAutoEscola(string nome)

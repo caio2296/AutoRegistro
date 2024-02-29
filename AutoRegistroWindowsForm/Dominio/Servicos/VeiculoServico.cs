@@ -28,14 +28,14 @@ namespace Dominio.Servicos
             }
         }
 
-        public async Task AtualizarVeiculo(Veiculo veiculo)
+        public void AtualizarVeiculo(Veiculo veiculo)
         {
             var validarModelo = veiculo.ValidarPropriedadeString(veiculo.Modelo, "Modelo");
             var validarPlaca = veiculo.ValidarPropriedadeString(veiculo.Placa, "Placa");
             var validarKmTrocaOleo = veiculo.ValidarPropriedadeString(veiculo.KmTrocaOleo.ToString(), "kmTrocaOleao");
             if (validarModelo && validarPlaca && validarKmTrocaOleo)
             {
-                await _iVeiculos.Atualizar(veiculo);
+                 _iVeiculos.Atualizar(veiculo);
             }
         }
 
