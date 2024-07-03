@@ -15,6 +15,9 @@ using Unity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Configuration;
+using MySqlConnector;
+
 namespace AutoRegistro
 {
 
@@ -36,7 +39,10 @@ namespace AutoRegistro
 
                 container = new UnityContainer();
                 var dbContextOptions = new DbContextOptionsBuilder<Contexto>()
-                    .UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
+
+                    //.UseMySql(ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString, new MySqlServerVersion(new Version(8, 0, 37)))
+                    //.UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
+                    .UseMySql("Server=mysql.autoregistro.kinghost.net;DataBase=autoregistro;User=autoregistro;Password=zxcasd384" ,new MySqlServerVersion(new Version(10, 2, 36)))
                     .Options;
 
 
@@ -111,6 +117,7 @@ namespace AutoRegistro
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Ocorreu um erro durante a inicialização do aplicativo: \n" + ex.Message);
 
                 throw new Exception("Ocorreu um erro durante a inicialização do aplicativo: " + ex.Message); ;
             }

@@ -18,7 +18,12 @@ namespace InfraEstrutura.Repositorio.Generico
         public RepositorioGenerico()
         {
             _optionBuilder = new DbContextOptionsBuilder<Contexto>()
-            .UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
+                                .UseMySql("Server=mysql.autoregistro.kinghost.net;DataBase=autoregistro;User=autoregistro;Password=zxcasd384",
+                                new MySqlServerVersion(new Version(10, 2, 36)))
+
+            //.UseMySql("Server=localhost;DataBase=autoregistro;Uid=root;Pwd=zxcasd384!A",
+            // new MySqlServerVersion(new Version(8, 0, 37)))
+            //.UseSqlServer("Server=tcp:profilecaio.database.windows.net,1433;Initial Catalog=AutoRegistro;Persist Security Info=False;User ID=caio;Password=zxcasd384!A;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
             .Options;
         }
 
