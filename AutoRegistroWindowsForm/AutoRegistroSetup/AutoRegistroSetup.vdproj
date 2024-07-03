@@ -15,25 +15,19 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_058B48C6FE6D4969B712BC86E697F462"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_1F1E4587CB8C40D3B0D6600506751FFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_6A2A3EE02BBA45E6BB99A8EC001F2490"
+        "MsmKey" = "8:_3F09B721B7AE4586BD0AB46671B1593A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8D9C6629389F45CFB930510BD164D219"
+        "MsmKey" = "8:_6A2A3EE02BBA45E6BB99A8EC001F2490"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -64,19 +58,14 @@
             "ComponentsUrl" = "8:"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
-                    {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 e x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
-                    }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.CoreRuntime.7.0.x64"
                     {
-                    "Name" = "8:Runtime do .NET 7.0.2 (x64)"
+                    "Name" = "8:Runtime do .NET 7.0.11 (x64)"
                     "ProductCode" = "8:Microsoft.NetCore.CoreRuntime.7.0.x64"
                     }
                     "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.NetCore.DesktopRuntime.7.0.x64"
                     {
-                    "Name" = "8:Runtime do .NET Desktop 7.0.2 (x64)"
+                    "Name" = "8:Runtime do .NET Desktop 7.0.11 (x64)"
                     "ProductCode" = "8:Microsoft.NetCore.DesktopRuntime.7.0.x64"
                     }
                 }
@@ -97,6 +86,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -128,26 +133,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_058B48C6FE6D4969B712BC86E697F462"
-            {
-            "SourcePath" = "8:C:\\Users\\CAIO\\Downloads\\corrida.ico"
-            "TargetName" = "8:corrida.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_7307528DF85C436A942B0960E68CC74E"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F1E4587CB8C40D3B0D6600506751FFA"
             {
             "SourcePath" = "8:..\\WindowsForm\\bin\\Release\\net7.0-windows\\AutoRegistro.deps.json"
@@ -168,10 +153,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D9C6629389F45CFB930510BD164D219"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3F09B721B7AE4586BD0AB46671B1593A"
             {
-            "SourcePath" = "8:C:\\Users\\CAIO\\Downloads\\corrida.png"
-            "TargetName" = "8:corrida.png"
+            "SourcePath" = "8:..\\..\\..\\..\\OneDrive\\Imagens\\Icones\\corrida.ico"
+            "TargetName" = "8:corrida.ico"
             "Tag" = "8:"
             "Folder" = "8:_7307528DF85C436A942B0960E68CC74E"
             "Condition" = "8:"
@@ -376,21 +361,21 @@
             "Target" = "8:_6A2A3EE02BBA45E6BB99A8EC001F2490"
             "Folder" = "8:_28B4A7A92772491A81E5B0BFDE2898B3"
             "WorkingFolder" = "8:_7307528DF85C436A942B0960E68CC74E"
-            "Icon" = "8:_058B48C6FE6D4969B712BC86E697F462"
+            "Icon" = "8:_3F09B721B7AE4586BD0AB46671B1593A"
             "Feature" = "8:"
             }
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_D5D579C0EFCC4B1793BA414BBEA4D3F1"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_5BF67C53E30443098B72CFE8A62B87C1"
             {
             "Name" = "8:AutoRegistro"
             "Arguments" = "8:"
-            "Description" = "8:AutoRegistro"
+            "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
             "Target" = "8:_6A2A3EE02BBA45E6BB99A8EC001F2490"
             "Folder" = "8:_503AE4FC250F42409A80E32224AC2D26"
             "WorkingFolder" = "8:_7307528DF85C436A942B0960E68CC74E"
-            "Icon" = "8:_058B48C6FE6D4969B712BC86E697F462"
+            "Icon" = "8:_3F09B721B7AE4586BD0AB46671B1593A"
             "Feature" = "8:"
             }
         }
@@ -822,7 +807,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6A2A3EE02BBA45E6BB99A8EC001F2490"
             {
-            "SourcePath" = "8:..\\WindowsForm\\obj\\Release\\net7.0-windows\\apphost.exe"
+            "SourcePath" = "8:..\\WindowsForm\\obj\\Debug\\net7.0-windows\\apphost.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_7307528DF85C436A942B0960E68CC74E"

@@ -13,12 +13,6 @@ namespace AutoRegistro
 {
     public partial class Form1 : Form
     {
-        string cs = ConfigurationManager.ConnectionStrings["dbcon"].ConnectionString;
-        SqlConnection con;
-        SqlCommand cmd;
-        SqlDataAdapter adapter;
-        DataTable dt;
-
 
         private readonly IUnityContainer container;
         private readonly AutoEscolaController _autoEscolaController;
